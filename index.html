@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/photos/mark-dark.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05070E" />
+
+    <!-- SEO -->
+    <title>Zaydo Tech — Custom Software, Automation & Digital Systems</title>
+    <meta name="description" content="Zaydo Tech engineers custom software, scalable web applications, workflow automation and practical AI systems that turn complex business challenges into reliable digital systems." />
+    <meta name="keywords" content="Zaydo Tech, custom software development, web application development, workflow automation, AI integration, business systems, digital platforms" />
+    <meta name="author" content="Zaydo Tech" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Zaydo Tech — Custom Software, Automation & Digital Systems" />
+    <meta property="og:description" content="We design and build custom software, web applications and intelligent automation that help businesses operate smarter and scale." />
+    <meta property="og:image" content="/photos/logo-dark.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Resolve the theme before first paint so the page never flashes the wrong palette. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('zaydo-theme');
+          var theme = stored || 'dark';
+          var root = document.documentElement;
+          root.classList.toggle('dark', theme === 'dark');
+          root.classList.toggle('light', theme === 'light');
+          root.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="antialiased overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
