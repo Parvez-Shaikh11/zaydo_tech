@@ -1,0 +1,16 @@
+{
+  // Static-asset Worker: there is no `main` script, so Cloudflare simply serves
+  // the built files. Without this the Worker falls back to whatever code is in
+  // the dashboard — which for a new Worker is the "Hello world" template.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zaydo-tech",
+  "compatibility_date": "2026-08-12",
+  "assets": {
+    "directory": "./dist",
+    // The router is client-side, so /services, /work/aeroops and friends do not
+    // exist as files. SPA mode serves index.html for any unmatched path and
+    // lets react-router take it from there; without it every direct visit or
+    // refresh outside "/" would 404.
+    "not_found_handling": "single-page-application"
+  }
+}
