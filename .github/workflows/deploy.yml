@@ -1,0 +1,35 @@
+# Pushing to GitHub does not, on its own, put anything on Cloudflare — the two
+# are unconnected. This is the connection: every push to main builds the site
+# and uploads dist/ to the `zaydo-tech` Worker described in wrangler.jsonc.
+#
+# One-time setup, in the GitHub repo under Settings > Secrets and variables >
+# Actions:
+#   CLOUDFLARE_API_TOKEN   Cloudflare dashboard > My Profile > API Tokens >
+#                          Create Token > "Edit Cloudflare Workers" template
+#   CLOUDFLARE_ACCOUNT_ID  the ID in the dashboard URL, right after /dash/
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main]
+  # lets you re-run a deploy from the Actions tab without pushing anything
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
