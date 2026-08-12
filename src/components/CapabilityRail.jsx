@@ -14,7 +14,7 @@ import { servicesData } from '../data/servicesData';
 export default function CapabilityRail() {
   const [hovered, setHovered] = useState(null);
   const activeService = hovered != null ? servicesData[hovered] : null;
-  const accent = activeService?.accent ?? '#1B72F5';
+  const accent = activeService?.accent ?? '#0059FD';
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

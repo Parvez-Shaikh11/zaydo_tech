@@ -48,7 +48,7 @@ export default function ServiceDetail() {
         </div>
       </PageHero>
 
-      <div className="mx-auto max-w-7xl space-y-24 px-4 pb-8 sm:px-6 sm:space-y-32 lg:px-8">
+      <div className="mx-auto max-w-7xl section-rhythm px-4 pb-8 sm:px-6 lg:px-8">
         {/* ------------------------------------------------- hero visual */}
         <Reveal className="relative overflow-hidden rounded-[2rem] border border-line/10 bg-panel/50 p-2 shadow-lift">
           <div className="relative isolate aspect-[16/9] overflow-hidden rounded-[1.6rem] sm:aspect-[21/8]">
@@ -87,7 +87,7 @@ export default function ServiceDetail() {
               {service.techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-lg border border-white/12 bg-black/45 px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-white/80 backdrop-blur-md"
+                  className="rounded-lg border border-line/10 bg-panel/85 px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted backdrop-blur-md"
                 >
                   {tech}
                 </span>
@@ -154,7 +154,7 @@ export default function ServiceDetail() {
               <motion.div
                 key={item.label}
                 variants={staggerItem}
-                className="surface surface-hover group relative overflow-hidden rounded-3xl p-6"
+                className="tile tile-hover group relative overflow-hidden p-6"
               >
                 <span
                   className="absolute right-5 top-4 font-display text-4xl font-black opacity-[0.07] transition-opacity duration-500 group-hover:opacity-20"
@@ -194,7 +194,7 @@ export default function ServiceDetail() {
           </Reveal>
 
           <Reveal delay={0.1} className="surface rounded-3xl p-7 sm:p-9 lg:col-span-8">
-            <h2 className="eyebrow text-cyanic-400">Typical workflow</h2>
+            <h2 className="eyebrow text-accent">Typical workflow</h2>
             <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {service.workflow.map((step, i) => (
                 <motion.div
@@ -231,7 +231,7 @@ export default function ServiceDetail() {
               />
               <Link
                 to="/work"
-                className="group inline-flex shrink-0 items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-cyanic-400"
+                className="group inline-flex shrink-0 items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-accent"
               >
                 All projects
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -266,25 +266,25 @@ export default function ServiceDetail() {
         <section className="grid gap-4 sm:grid-cols-2">
           <Link
             to={`/services/${previous.id}`}
-            className="surface surface-hover group rounded-3xl p-6"
+            className="tile tile-hover group p-6"
           >
             <span className="flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-faint">
               <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-x-1" />
               Previous capability
             </span>
-            <p className="mt-3 text-lg font-bold text-ink transition-colors group-hover:text-cyanic-400">
+            <p className="mt-3 text-lg font-bold text-ink transition-colors group-hover:text-accent">
               {previous.title}
             </p>
           </Link>
           <Link
             to={`/services/${next.id}`}
-            className="surface surface-hover group rounded-3xl p-6 text-right"
+            className="tile tile-hover group p-6 text-right"
           >
             <span className="flex items-center justify-end gap-2 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-faint">
               Next capability
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
-            <p className="mt-3 text-lg font-bold text-ink transition-colors group-hover:text-cyanic-400">
+            <p className="mt-3 text-lg font-bold text-ink transition-colors group-hover:text-accent">
               {next.title}
             </p>
           </Link>

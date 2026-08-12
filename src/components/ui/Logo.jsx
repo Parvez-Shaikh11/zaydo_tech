@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../theme/ThemeProvider';
+import { brand } from '../../data/images';
 
 /**
  * Renders the official Zaydo Tech lockup — never a recreation.
@@ -10,17 +11,27 @@ import { useTheme } from '../../theme/ThemeProvider';
  * assets used here. The correct variant is picked from the active theme so the
  * wordmark keeps its contrast in both palettes.
  */
-export default function Logo({ variant = 'full', className = '', to = '/', onClick }) {
+/* `onDark` forces the dark-surface asset for bands that are dark in BOTH
+   themes (the footer). Without it, light mode hands those surfaces the
+   dark-ink wordmark and it disappears into the background. */
+export default function Logo({
+  variant = 'full',
+  className = '',
+  to = '/',
+  onClick,
+  onDark = false,
+}) {
   const { isDark } = useTheme();
+  const useDarkAsset = isDark || onDark;
 
   const src =
     variant === 'mark'
-      ? isDark
-        ? '/photos/mark-dark.png'
-        : '/photos/mark-light.png'
-      : isDark
-        ? '/photos/logo-dark.png'
-        : '/photos/logo-light.png';
+      ? useDarkAsset
+        ? brand.markDark
+        : brand.markLight
+      : useDarkAsset
+        ? brand.logoDark
+        : brand.logoLight;
 
   const image = (
     <img

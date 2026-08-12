@@ -28,8 +28,8 @@ const NODES = [
 
 export default function CircuitField({
   className = '',
-  color = '#22D3EE',
-  secondary = '#1B72F5',
+  color = '#00C9FD',
+  secondary = '#0059FD',
   opacity = 0.5,
   packets = true,
 }) {
@@ -117,7 +117,7 @@ export default function CircuitField({
 }
 
 /** Narrow variant: a few horizontal data lanes, for wide/short containers. */
-export function DataLanes({ className = '', color = '#22D3EE', opacity = 0.35 }) {
+export function DataLanes({ className = '', color = '#00C9FD', opacity = 0.35 }) {
   const uid = useId().replace(/:/g, '');
   const lanes = [40, 90, 140, 190, 240];
 

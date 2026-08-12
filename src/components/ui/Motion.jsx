@@ -162,7 +162,7 @@ export function ScrollProgress() {
   return (
     <div className="fixed inset-x-0 top-0 z-[70] h-[2px] bg-transparent">
       <div
-        className="h-full bg-gradient-to-r from-brand-500 via-cyanic-400 to-brand-400 transition-[width] duration-150 ease-out"
+        className="h-full bg-gradient-to-r from-brand-500 via-accent to-brand-400 transition-[width] duration-150 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>

@@ -8,6 +8,9 @@ import PageHero from '../components/PageHero';
 import SectionHeader from '../components/ui/SectionHeader';
 import Reveal, { Stagger, staggerItem } from '../components/ui/Reveal';
 import CTASection from '../components/CTASection';
+import TeamGrid from '../components/TeamGrid';
+import PhotoStage from '../components/ui/PhotoStage';
+import { photos } from '../data/images';
 
 const beliefs = [
   {
@@ -81,37 +84,39 @@ export default function About() {
         </div>
       </PageHero>
 
-      <div className="mx-auto max-w-7xl space-y-28 px-4 sm:px-6 sm:space-y-36 lg:px-8">
+      <div className="mx-auto max-w-7xl section-rhythm px-4 sm:px-6 lg:px-8">
         {/* ------------------------------------------------- why we exist */}
         <section className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal direction="right" className="lg:col-span-6">
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-line/10 bg-panel/50 p-2 shadow-lift">
-              <div className="relative isolate aspect-[4/3] overflow-hidden rounded-[1.35rem]">
-                <img
-                  src="/photos/hero_3d.png"
-                  alt="Connected digital systems"
-                  className="brand-grade h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-panel via-panel/20 to-transparent" />
-                <div className="absolute inset-0 bg-brand-500 opacity-35 mix-blend-color" />
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 top-0 h-24 animate-scan-line bg-gradient-to-b from-transparent via-cyanic-400/40 to-transparent"
-                />
-                <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-md">
-                  <p className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-white/55">
-                    Operating principle
-                  </p>
-                  <p className="mt-1 text-[0.85rem] font-semibold text-white">
-                    Solve the business problem. Then write the code.
-                  </p>
-                </div>
+            {/* cut-out photo with a live backdrop, plus a stat badge and a
+                caption breaking out of it */}
+            <div className="relative">
+              <span className="absolute -right-2 -top-2 z-10 flex h-24 w-24 flex-col items-center justify-center rounded-full bg-brand-gradient text-center text-white shadow-lg">
+                <span className="font-display text-xl font-black leading-none">05</span>
+                <span className="mt-1 px-2 text-[0.55rem] font-semibold leading-tight">
+                  engineering tracks
+                </span>
+              </span>
+
+              {/* `planning`, not `client` — the closing CTA on this same page
+                  already carries the client shot */}
+              <PhotoStage photo={photos.planning} accent="#0059FD" layout="split" />
+
+              {/* caption sits below the photo — overlaying it would cover the
+                  people the picture exists to show */}
+              <div className="tile relative z-10 mx-auto -mt-4 w-[85%] px-5 py-4">
+                <p className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-faint">
+                  Operating principle
+                </p>
+                <p className="mt-1 text-[0.85rem] font-semibold text-ink">
+                  Solve the business problem. Then write the code.
+                </p>
               </div>
             </div>
           </Reveal>
 
           <Reveal direction="left" delay={0.1} className="lg:col-span-6">
-            <span className="chip !border-cyanic-400/40 !text-cyanic-400">Why we exist</span>
+            <span className="chip !border-accent/40 !text-accent">Why we exist</span>
             <h2 className="mt-6 text-3xl font-extrabold leading-tight text-ink sm:text-[2.5rem]">
               Most businesses do not have a software problem.
               <span className="text-brand-gradient"> They have a process problem.</span>
@@ -135,7 +140,7 @@ export default function About() {
               </p>
             </div>
 
-            <div className="mt-8 rounded-2xl border-l-2 border-cyanic-400 bg-line/[0.03] py-4 pl-5 pr-4">
+            <div className="mt-8 rounded-2xl border-l-2 border-accent bg-line/[0.03] py-4 pl-5 pr-4">
               <p className="text-[0.95rem] font-semibold leading-relaxed text-ink">
                 "Technology should solve real problems, not create more complexity."
               </p>
@@ -153,7 +158,7 @@ export default function About() {
             title="Four ideas that decide everything"
             highlight={[2, 3]}
             description="These are not values on a wall. Each one changes what we do when a decision gets difficult."
-            className="mb-14"
+            className="mb-[3.75rem]"
           />
 
           <Stagger className="grid gap-4 sm:grid-cols-2">
@@ -163,9 +168,9 @@ export default function About() {
                 <motion.div
                   key={belief.title}
                   variants={staggerItem}
-                  className="surface surface-hover card-sheen group rounded-3xl p-7"
+                  className="tile tile-hover card-sheen group p-7"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyanic-400/30 bg-cyanic-400/10 text-cyanic-400 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10 text-accent transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
                     <Icon className="h-5 w-5" />
                   </span>
                   <h3 className="mt-5 text-lg font-bold text-ink">{belief.title}</h3>
@@ -182,7 +187,7 @@ export default function About() {
             eyebrow="Engineering principles"
             title="The standard we hold work to"
             highlight={[4, 5]}
-            className="mb-14"
+            className="mb-[3.75rem]"
           />
 
           <Stagger className="grid gap-4 lg:grid-cols-4 sm:grid-cols-2">
@@ -192,7 +197,7 @@ export default function About() {
                 <motion.div
                   key={principle.n}
                   variants={staggerItem}
-                  className="surface surface-hover group relative overflow-hidden rounded-3xl p-7"
+                  className="tile tile-hover group relative overflow-hidden p-7"
                 >
                   <span className="absolute right-5 top-4 font-display text-5xl font-black text-line/[0.05] transition-colors duration-500 group-hover:text-brand-500/15">
                     {principle.n}
@@ -210,6 +215,9 @@ export default function About() {
           </Stagger>
         </section>
 
+        {/* Renders null until src/data/team.js holds real people. */}
+        <TeamGrid className="px-0" />
+
         {/* -------------------------------------------------------- vision */}
         <section>
           <Reveal className="surface relative overflow-hidden rounded-[2rem] p-8 sm:p-14">
@@ -217,13 +225,13 @@ export default function About() {
               aria-hidden
               className="pointer-events-none absolute inset-0 animate-gradient-pan opacity-[0.14]"
               style={{
-                background: 'linear-gradient(115deg, #1B72F5 0%, #06B6D4 45%, transparent 75%)',
+                background: 'linear-gradient(115deg, #0059FD 0%, #00A7FD 45%, transparent 75%)',
                 backgroundSize: '220% 220%',
               }}
             />
             <div className="relative grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-5">
-                <span className="chip !border-cyanic-400/40 !text-cyanic-400">Vision</span>
+                <span className="chip !border-accent/40 !text-accent">Vision</span>
                 <h2 className="mt-6 text-3xl font-extrabold leading-tight text-ink sm:text-[2.4rem]">
                   Where we are going
                 </h2>

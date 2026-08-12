@@ -1,3 +1,5 @@
+import { renders } from './images';
+
 /**
  * Case studies.
  *
@@ -20,9 +22,9 @@ export const projects = [
     year: '2025',
     featured: true,
     role: 'Core Software Architecture & Backend Engineering',
-    image: '/photos/hero_3d.png',
+    image: renders.hero,
     grade: 'brand-grade',
-    accent: '#1B72F5',
+    accent: '#0059FD',
     description:
       'A resilient operations suite that schedules resources, monitors asset telemetry in real time, and runs predictive maintenance logging from a single database.',
     challenge:
@@ -61,9 +63,9 @@ export const projects = [
     year: '2025',
     featured: true,
     role: 'Frontend Engineering & Third-Party Integration',
-    image: '/photos/software_3d.png',
+    image: renders.software,
     grade: 'brand-grade',
-    accent: '#0891B2',
+    accent: '#0077FD',
     description:
       'A decoupled commerce interface with global inventory sync, edge-cached catalogue queries and a merchant dashboard built for daily operational use.',
     challenge:
@@ -102,9 +104,9 @@ export const projects = [
     year: '2025',
     featured: false,
     role: 'Automation Architecture & API Integration',
-    image: '/photos/automation_3d.png',
+    image: renders.automation,
     grade: 'brand-grade-warm',
-    accent: '#3B9CFF',
+    accent: '#0086FD',
     description:
       'An automation pipeline that ingests inbound documentation, validates field data against reference rules, and syncs structured records into a legacy management system.',
     challenge:
@@ -143,9 +145,9 @@ export const projects = [
     year: '2026',
     featured: false,
     role: 'Retrieval Architecture & Evaluation',
-    image: '/photos/ai_3d.png',
+    image: renders.ai,
     grade: 'brand-grade-green',
-    accent: '#22D3EE',
+    accent: '#00C9FD',
     description:
       'An internal retrieval system that answers questions from a company document set and cites the exact source passage behind every answer.',
     challenge:
@@ -184,10 +186,10 @@ export const projects = [
     year: '2026',
     featured: false,
     role: 'Content Architecture, Design & Frontend Engineering',
-    image: '/photos/software_3d.png',
+    image: renders.software,
     grade: 'brand-grade',
     imagePosition: 'object-right',
-    accent: '#7CBEFF',
+    accent: '#5CA5FF',
     description:
       'A concept build exploring how a professional services firm should present itself online and how enquiries should be structured before they reach a human.',
     challenge:

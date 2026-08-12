@@ -33,7 +33,7 @@ function FeatureCard({ service, className = '', tall = false }) {
       <TiltCard max={4} className="h-full">
         <Link
           to={`/services/${service.id}`}
-          className="surface surface-hover card-sheen group relative flex h-full flex-col overflow-hidden rounded-3xl"
+          className="tile tile-hover card-sheen group relative flex h-full flex-col overflow-hidden"
         >
           {/* image band */}
           <div className={`relative isolate overflow-hidden ${tall ? 'h-52 sm:h-64' : 'h-40'}`}>
@@ -58,14 +58,14 @@ function FeatureCard({ service, className = '', tall = false }) {
             >
               <Icon className="h-5 w-5" />
             </span>
-            <span className="absolute right-5 top-5 font-mono text-[0.6rem] tracking-[0.22em] text-white/45">
+            <span className="absolute right-5 top-5 font-mono text-[0.6rem] tracking-[0.22em] text-faint">
               {service.number}
             </span>
           </div>
 
           {/* body */}
           <div className="flex flex-1 flex-col p-6 sm:p-7">
-            <h3 className="text-xl font-bold text-ink transition-colors duration-300 group-hover:text-cyanic-400 sm:text-2xl">
+            <h3 className="text-xl font-bold text-ink transition-colors duration-300 group-hover:text-accent sm:text-2xl">
               {service.title}
             </h3>
             <p className="mt-3 text-[0.86rem] leading-relaxed text-muted">
@@ -86,7 +86,7 @@ function FeatureCard({ service, className = '', tall = false }) {
               </ul>
             )}
 
-            <div className="mt-auto flex items-center gap-2 pt-6 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-cyanic-400">
+            <div className="mt-auto flex items-center gap-2 pt-6 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-accent">
               Explore capability
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </div>
@@ -104,7 +104,7 @@ function CompactCard({ service, className = '' }) {
     <motion.div variants={staggerItem} className={className}>
       <Link
         to={`/services/${service.id}`}
-        className="surface surface-hover card-sheen group relative flex h-full flex-col overflow-hidden rounded-3xl p-6"
+        className="tile tile-hover card-sheen group relative flex h-full flex-col overflow-hidden p-6"
       >
         {/* faint capability wash that wakes up on hover */}
         <div
@@ -129,14 +129,14 @@ function CompactCard({ service, className = '' }) {
           </span>
         </div>
 
-        <h3 className="relative mt-6 text-lg font-bold text-ink transition-colors duration-300 group-hover:text-cyanic-400">
+        <h3 className="relative mt-6 text-lg font-bold text-ink transition-colors duration-300 group-hover:text-accent">
           {service.title}
         </h3>
         <p className="relative mt-2.5 text-[0.82rem] leading-relaxed text-muted">
           {service.tagline}
         </p>
 
-        <div className="relative mt-auto flex items-center gap-2 pt-6 text-[0.66rem] font-bold uppercase tracking-[0.16em] text-faint transition-colors duration-300 group-hover:text-cyanic-400">
+        <div className="relative mt-auto flex items-center gap-2 pt-6 text-[0.66rem] font-bold uppercase tracking-[0.16em] text-faint transition-colors duration-300 group-hover:text-accent">
           Read more
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </div>

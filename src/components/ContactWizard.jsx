@@ -44,10 +44,22 @@ const EMPTY = {
   contactMethod: 'Email',
 };
 
+/* Blur and a touch of scale on top of the slide, so a step arrives rather than
+   simply appearing at its final position. */
 const slide = {
-  enter: (dir) => ({ opacity: 0, x: dir > 0 ? 46 : -46 }),
-  center: { opacity: 1, x: 0 },
-  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -46 : 46 }),
+  enter: (dir) => ({ opacity: 0, x: dir > 0 ? 54 : -54, scale: 0.985, filter: 'blur(6px)' }),
+  center: { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' },
+  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -54 : 54, scale: 0.985, filter: 'blur(6px)' }),
+};
+
+/* Fields cascade in behind their step rather than landing as one slab. */
+const fieldGroup = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.12 } },
+};
+const fieldItem = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function ContactWizard() {
@@ -110,37 +122,65 @@ export default function ContactWizard() {
   return (
     <div className="mx-auto w-full max-w-3xl">
       {/* ------------------------------------------------------- progress */}
-      <div className="mb-8">
-        <div className="mb-3 flex items-center justify-between">
-          <span className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-faint">
-            Step {String(step).padStart(2, '0')} of 04
-          </span>
-          <span className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-cyanic-400">
-            {STEPS[step - 1].label}
-          </span>
-        </div>
-        <div className="h-1.5 overflow-hidden rounded-full bg-line/[0.08]">
-          <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-brand-500 to-cyanic-400"
-            animate={{ width: `${(step / 4) * 100}%` }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      {/* Numbered markers on a rail, not a bare bar: at a glance you can see
+          which steps are done, which one you are on and what is still to come. */}
+      <div className="mb-9">
+        <div className="relative">
+          {/* rail */}
+          <span
+            aria-hidden
+            className="absolute left-0 right-0 top-[1.125rem] h-[3px] rounded-full bg-line/[0.1]"
           />
+          <motion.span
+            aria-hidden
+            className="absolute left-0 top-[1.125rem] h-[3px] rounded-full bg-gradient-to-r from-brand-500 to-accent"
+            animate={{ width: `${((step - 1) / (STEPS.length - 1)) * 100}%` }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          />
+
+          <ol className="relative flex justify-between">
+            {STEPS.map((s) => {
+              const done = s.n < step;
+              const current = s.n === step;
+              return (
+                <li key={s.n} className="flex flex-1 flex-col items-center text-center">
+                  <span
+                    className={`flex h-9 w-9 items-center justify-center rounded-full font-mono text-[0.68rem] font-bold transition-all duration-500 ${
+                      done
+                        ? 'bg-brand-500 text-white'
+                        : current
+                          ? 'bg-brand-500 text-white ring-4 ring-brand-500/20'
+                          : 'bg-panel text-faint ring-1 ring-line/[0.12]'
+                    }`}
+                  >
+                    {done ? <Check className="h-4 w-4" /> : String(s.n).padStart(2, '0')}
+                  </span>
+                  <span
+                    className={`mt-2.5 hidden font-mono text-[0.56rem] uppercase tracking-[0.14em] transition-colors duration-500 sm:block ${
+                      current ? 'text-accent' : done ? 'text-muted' : 'text-faint/60'
+                    }`}
+                  >
+                    {s.label}
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
         </div>
-        <div className="mt-3 flex justify-between">
-          {STEPS.map((s) => (
-            <span
-              key={s.n}
-              className={`font-mono text-[0.55rem] uppercase tracking-[0.14em] transition-colors ${
-                s.n <= step ? 'text-muted' : 'text-faint/50'
-              }`}
-            >
-              {s.label}
-            </span>
-          ))}
-        </div>
+
+        <p className="mt-5 text-center font-mono text-[0.6rem] uppercase tracking-[0.18em] text-faint sm:hidden">
+          Step {String(step).padStart(2, '0')} of 04 · {STEPS[step - 1].label}
+        </p>
       </div>
 
-      <form onSubmit={onSubmit} className="surface rounded-3xl p-6 sm:p-9">
+      <form onSubmit={onSubmit} className="tile relative overflow-hidden p-6 sm:p-9">
+        {/* faint surface grain so the card is not a blank white slab */}
+        <span aria-hidden className="texture-hatch pointer-events-none absolute inset-0 opacity-60" />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-brand-500/[0.07] blur-3xl"
+        />
+        <div className="relative">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={step}
@@ -156,34 +196,58 @@ export default function ContactWizard() {
                 title="What do you need?"
                 subtitle="Pick the closest match. If none of them fit, the last option is a perfectly good answer."
               >
-                <div className="grid gap-3 sm:grid-cols-2">
+                <motion.div
+                  variants={fieldGroup}
+                  initial="hidden"
+                  animate="show"
+                  className="grid gap-3.5 sm:grid-cols-2"
+                >
                   {projectTypes.map((type) => {
                     const Icon = type.icon;
                     const selected = form.projectType === type.id;
                     return (
-                      <button
+                      <motion.button
                         key={type.id}
+                        variants={fieldItem}
                         type="button"
                         onClick={() => {
                           set({ projectType: type.id });
                           setErrors((e) => ({ ...e, projectType: '' }));
                         }}
-                        className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition-all duration-300 ${
+                        aria-pressed={selected}
+                        /* Selected reads as a filled brand card rather than a
+                           7% tint — on the light canvas that tint was almost
+                           indistinguishable from the unselected state. */
+                        className={`group relative overflow-hidden rounded-2xl p-4 text-left transition-[transform,box-shadow,background-color] duration-300 ease-out hover:-translate-y-1 ${
                           selected
-                            ? 'border-cyanic-400/60 bg-cyanic-400/[0.07]'
-                            : 'border-line/[0.09] bg-line/[0.02] hover:border-brand-500/35'
+                            ? 'bg-brand-500 shadow-[0_18px_34px_-16px_rgba(0,89,253,0.75)]'
+                            : 'bg-panel shadow-tile ring-1 ring-line/[0.08] hover:shadow-tile-hover'
                         }`}
                       >
-                        <div className="flex items-start justify-between gap-3">
+                        <span
+                          aria-hidden
+                          className={`pointer-events-none absolute inset-0 transition-opacity duration-300 ${
+                            selected ? 'opacity-100' : 'opacity-0'
+                          }`}
+                          style={{
+                            backgroundImage:
+                              'radial-gradient(circle at 82% 6%, rgb(255 255 255 / 0.18), transparent 58%)',
+                          }}
+                        />
+                        <div className="relative flex items-start justify-between gap-3">
                           <span
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-110"
-                            style={{
-                              borderColor: `${type.accent}44`,
-                              background: `${type.accent}14`,
-                              color: type.accent,
-                            }}
+                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
+                            style={
+                              selected
+                                ? { background: 'rgb(255 255 255 / 0.2)', color: '#fff' }
+                                : {
+                                  background: `${type.accent}14`,
+                                  boxShadow: `inset 0 0 0 1px ${type.accent}3d`,
+                                  color: type.accent,
+                                }
+                            }
                           >
-                            <Icon className="h-4 w-4" />
+                            <Icon className="h-[1.05rem] w-[1.05rem]" />
                           </span>
                           <AnimatePresence>
                             {selected && (
@@ -191,19 +255,32 @@ export default function ContactWizard() {
                                 initial={{ scale: 0, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
                                 exit={{ scale: 0, opacity: 0 }}
-                                className="flex h-5 w-5 items-center justify-center rounded-full bg-cyanic-400 text-canvas"
+                                transition={{ type: 'spring', stiffness: 420, damping: 20 }}
+                                className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-brand-600"
                               >
-                                <Check className="h-3 w-3" />
+                                <Check className="h-3 w-3" strokeWidth={3.5} />
                               </motion.span>
                             )}
                           </AnimatePresence>
                         </div>
-                        <p className="mt-3 text-[0.86rem] font-bold text-ink">{type.title}</p>
-                        <p className="mt-1 text-[0.74rem] leading-snug text-faint">{type.desc}</p>
-                      </button>
+                        <p
+                          className={`relative mt-3.5 text-[0.9rem] font-bold transition-colors duration-300 ${
+                            selected ? 'text-white' : 'text-ink'
+                          }`}
+                        >
+                          {type.title}
+                        </p>
+                        <p
+                          className={`relative mt-1.5 text-[0.76rem] leading-snug transition-colors duration-300 ${
+                            selected ? 'text-white/85' : 'text-faint'
+                          }`}
+                        >
+                          {type.desc}
+                        </p>
+                      </motion.button>
                     );
                   })}
-                </div>
+                </motion.div>
                 <FieldError error={errors.projectType} />
               </StepShell>
             )}
@@ -213,7 +290,7 @@ export default function ContactWizard() {
                 title="Tell us about the project"
                 subtitle="The more concrete this is, the more useful our first reply will be."
               >
-                <div className="space-y-5">
+                <motion.div variants={fieldGroup} initial="hidden" animate="show" className="space-y-5">
                   <Field
                     as="textarea"
                     rows={3}
@@ -252,7 +329,7 @@ export default function ContactWizard() {
                     onChange={onChange}
                     placeholder="e.g. Excel, Tally, a CRM, an old internal tool"
                   />
-                </div>
+                </motion.div>
               </StepShell>
             )}
 
@@ -261,8 +338,8 @@ export default function ContactWizard() {
                 title="Your business"
                 subtitle="Context that helps us judge scale, constraints and regulatory considerations."
               >
-                <div className="space-y-5">
-                  <div className="grid gap-5 sm:grid-cols-2">
+                <motion.div variants={fieldGroup} initial="hidden" animate="show" className="space-y-5">
+                  <motion.div className="grid gap-5 sm:grid-cols-2">
                     <Field
                       label="Company name"
                       name="companyName"
@@ -281,7 +358,7 @@ export default function ContactWizard() {
                       placeholder="e.g. Logistics, Healthcare, Retail"
                       required
                     />
-                  </div>
+                  </motion.div>
                   <Field
                     label="Company website"
                     name="website"
@@ -289,7 +366,7 @@ export default function ContactWizard() {
                     onChange={onChange}
                     placeholder="https://example.com"
                   />
-                </div>
+                </motion.div>
               </StepShell>
             )}
 
@@ -298,8 +375,8 @@ export default function ContactWizard() {
                 title="How should we reach you?"
                 subtitle="A person reads this — there is no autoresponder sequence behind it."
               >
-                <div className="space-y-5">
-                  <div className="grid gap-5 sm:grid-cols-2">
+                <motion.div variants={fieldGroup} initial="hidden" animate="show" className="space-y-5">
+                  <motion.div className="grid gap-5 sm:grid-cols-2">
                     <Field
                       label="Your name"
                       name="name"
@@ -319,8 +396,8 @@ export default function ContactWizard() {
                       placeholder="you@company.com"
                       required
                     />
-                  </div>
-                  <div className="grid gap-5 sm:grid-cols-2">
+                  </motion.div>
+                  <motion.div className="grid gap-5 sm:grid-cols-2">
                     <Field
                       label="Phone number"
                       name="phone"
@@ -328,7 +405,7 @@ export default function ContactWizard() {
                       onChange={onChange}
                       placeholder="Optional"
                     />
-                    <div>
+                    <motion.div variants={fieldItem}>
                       <label
                         htmlFor="contactMethod"
                         className="mb-2 block text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-muted"
@@ -345,9 +422,9 @@ export default function ContactWizard() {
                         <option value="Email">Email</option>
                         <option value="Phone">Phone call</option>
                       </select>
-                    </div>
-                  </div>
-                </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
               </StepShell>
             )}
           </motion.div>
@@ -380,6 +457,7 @@ export default function ContactWizard() {
             </button>
           )}
         </div>
+        </div>
       </form>
     </div>
   );
@@ -400,13 +478,15 @@ function StepShell({ title, subtitle, children }) {
 function Field({ as = 'input', label, name, error, required, className = '', ...rest }) {
   const Tag = as;
   return (
-    <div>
+    /* `group` + `focus-within:` on the label is what makes a field feel alive:
+       the caption picks up the brand colour as soon as the caret lands in it. */
+    <motion.div variants={fieldItem} className="group">
       <label
         htmlFor={name}
-        className="mb-2 block text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-muted"
+        className="mb-2 block text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-muted transition-colors duration-300 group-focus-within:text-accent"
       >
         {label}
-        {required && <span className="ml-1 text-cyanic-400">*</span>}
+        {required && <span className="ml-1 text-accent">*</span>}
       </label>
       <Tag
         id={name}
@@ -417,7 +497,7 @@ function Field({ as = 'input', label, name, error, required, className = '', ...
         {...rest}
       />
       <FieldError error={error} />
-    </div>
+    </motion.div>
   );
 }
 
@@ -474,7 +554,7 @@ function Confirmation({ form }) {
         </h3>
         <p className="mx-auto mt-4 max-w-lg text-[0.9rem] leading-relaxed text-muted">
           Thank you, <span className="font-semibold text-ink">{form.name}</span>. We have your
-          enquiry about <span className="font-semibold text-cyanic-400">{form.projectType}</span>{' '}
+          enquiry about <span className="font-semibold text-accent">{form.projectType}</span>{' '}
           for <span className="font-semibold text-ink">{form.companyName}</span>.
         </p>
 
@@ -493,7 +573,7 @@ function Confirmation({ form }) {
                 transition={{ delay: 0.4 + i * 0.12 }}
                 className="flex items-start gap-3 text-[0.84rem] leading-relaxed text-muted"
               >
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-line/10 bg-line/[0.04] font-mono text-[0.6rem] text-cyanic-400">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-line/10 bg-line/[0.04] font-mono text-[0.6rem] text-accent">
                   {i + 1}
                 </span>
                 {line}

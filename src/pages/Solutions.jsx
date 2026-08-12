@@ -87,7 +87,7 @@ export default function Solutions() {
         </Link>
       </PageHero>
 
-      <div className="mx-auto max-w-7xl space-y-28 px-4 sm:px-6 sm:space-y-36 lg:px-8">
+      <div className="mx-auto max-w-7xl section-rhythm px-4 sm:px-6 lg:px-8">
         {/* --------------------------------------------- business challenges */}
         <section>
           <SectionHeader
@@ -95,7 +95,7 @@ export default function Solutions() {
             title="What usually brings people here"
             highlight={[4, 5]}
             description="Almost every enquiry we receive is a version of one of these six."
-            className="mb-14"
+            className="mb-[3.75rem]"
           />
 
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -105,7 +105,7 @@ export default function Solutions() {
                 <motion.div
                   key={challenge.title}
                   variants={staggerItem}
-                  className="surface surface-hover group relative overflow-hidden rounded-3xl p-6"
+                  className="tile tile-hover group relative overflow-hidden p-6"
                 >
                   <div
                     aria-hidden
@@ -131,7 +131,7 @@ export default function Solutions() {
             title="Five places we create leverage"
             highlight={[2, 3, 4]}
             description="Each area maps to a capability, so the route from problem to engineering is always visible."
-            className="mb-14"
+            className="mb-[3.75rem]"
           />
 
           <Stagger className="space-y-4">
@@ -139,12 +139,12 @@ export default function Solutions() {
               const service = servicesData.find((s) => s.id === area.serviceId);
               return (
                 <motion.div key={area.n} variants={staggerItem}>
-                  <div className="surface surface-hover group grid gap-6 rounded-3xl p-7 sm:p-9 lg:grid-cols-12 lg:items-center">
+                  <div className="tile tile-hover group grid gap-6 p-7 sm:p-9 lg:grid-cols-12 lg:items-center">
                     <div className="lg:col-span-5">
                       <div className="flex items-center gap-4">
                         <span
                           className="font-display text-4xl font-black transition-colors duration-500"
-                          style={{ color: `${service?.accent ?? '#1B72F5'}33` }}
+                          style={{ color: `${service?.accent ?? '#0059FD'}33` }}
                         >
                           {area.n}
                         </span>
@@ -199,7 +199,7 @@ export default function Solutions() {
             title="Where these patterns apply"
             highlight={[3, 4]}
             description="Listed as applications of our capability, not as claimed specialisations. We do not pretend to industry expertise we have not earned."
-            className="mb-14"
+            className="mb-[3.75rem]"
           />
 
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -209,7 +209,7 @@ export default function Solutions() {
                 <motion.div
                   key={industry.name}
                   variants={staggerItem}
-                  className="surface surface-hover group flex items-start gap-4 rounded-3xl p-6"
+                  className="tile tile-hover group flex items-start gap-4 p-6"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-brand-500/25 bg-brand-500/10 text-brand-400 transition-transform duration-500 group-hover:scale-110">
                     <Icon className="h-5 w-5" />
@@ -233,7 +233,7 @@ export default function Solutions() {
             title="Problem in, system out"
             highlight={[2, 3]}
             description="The same route every engagement follows, regardless of which capability it lands in."
-            className="mb-14"
+            className="mb-[3.75rem]"
           />
 
           <Reveal className="surface overflow-x-auto rounded-3xl p-8">
@@ -266,7 +266,7 @@ export default function Solutions() {
                       whileInView={{ scaleX: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.09 + 0.1, duration: 0.4 }}
-                      className="h-px w-8 origin-left bg-gradient-to-r from-brand-500/60 to-cyanic-400/60 sm:w-14"
+                      className="h-px w-8 origin-left bg-gradient-to-r from-brand-500/60 to-accent/60 sm:w-14"
                     />
                   )}
                 </React.Fragment>

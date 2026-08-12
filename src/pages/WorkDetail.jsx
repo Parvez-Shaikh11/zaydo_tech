@@ -51,7 +51,7 @@ export default function WorkDetail() {
           {service && (
             <Link
               to={`/services/${service.id}`}
-              className="chip transition-colors hover:!text-cyanic-400"
+              className="chip transition-colors hover:!text-accent"
             >
               <service.icon className="h-3 w-3" />
               {service.short}
@@ -60,7 +60,7 @@ export default function WorkDetail() {
         </div>
       </PageHero>
 
-      <div className="mx-auto max-w-7xl space-y-24 px-4 sm:px-6 sm:space-y-32 lg:px-8">
+      <div className="mx-auto max-w-7xl section-rhythm px-4 sm:px-6 lg:px-8">
         {/* ------------------------------------------------- project visual */}
         <Reveal className="relative overflow-hidden rounded-[2rem] border border-line/10 bg-panel/50 p-2 shadow-lift">
           <div className="relative isolate aspect-[16/9] overflow-hidden rounded-[1.6rem] sm:aspect-[21/9]">
@@ -94,7 +94,7 @@ export default function WorkDetail() {
             <p className="mt-6 text-[0.92rem] leading-relaxed text-muted">{project.challenge}</p>
           </Reveal>
           <Reveal delay={0.1} className="surface rounded-3xl p-7 sm:p-9">
-            <h2 className="eyebrow text-cyanic-400">02 — The approach</h2>
+            <h2 className="eyebrow text-accent">02 — The approach</h2>
             <p className="mt-6 text-[0.92rem] leading-relaxed text-muted">{project.approach}</p>
           </Reveal>
         </section>
@@ -118,7 +118,7 @@ export default function WorkDetail() {
                 <motion.div
                   key={key}
                   variants={staggerItem}
-                  className="surface surface-hover group relative overflow-hidden rounded-3xl p-6"
+                  className="tile tile-hover group relative overflow-hidden p-6"
                 >
                   <span className="absolute right-5 top-4 font-mono text-[0.6rem] text-faint">
                     L{String(i + 1).padStart(2, '0')}
@@ -153,7 +153,7 @@ export default function WorkDetail() {
                       {meta.label}
                     </span>
                     {i < archEntries.length - 1 && (
-                      <ArrowRight className="h-4 w-4 shrink-0 text-cyanic-400/60" />
+                      <ArrowRight className="h-4 w-4 shrink-0 text-accent/60" />
                     )}
                   </React.Fragment>
                 );
@@ -176,7 +176,7 @@ export default function WorkDetail() {
               <motion.div
                 key={feature}
                 variants={staggerItem}
-                className="surface surface-hover flex items-start gap-4 rounded-2xl p-5"
+                className="tile tile-hover flex items-start gap-4 p-5"
               >
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl font-mono text-[0.66rem] font-bold"
@@ -240,7 +240,7 @@ export default function WorkDetail() {
         <Reveal>
           <Link
             to={`/work/${next.slug}`}
-            className="surface surface-hover card-sheen group grid overflow-hidden rounded-[1.75rem] sm:grid-cols-3"
+            className="tile tile-hover card-sheen group grid overflow-hidden rounded-[var(--radius-tile-lg)] sm:grid-cols-3"
           >
             <div className="relative h-40 overflow-hidden sm:h-full">
               <img
@@ -255,11 +255,11 @@ export default function WorkDetail() {
               <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-faint">
                 Next case study
               </span>
-              <h2 className="mt-3 text-2xl font-extrabold text-ink transition-colors group-hover:text-cyanic-400 sm:text-3xl">
+              <h2 className="mt-3 text-2xl font-extrabold text-ink transition-colors group-hover:text-accent sm:text-3xl">
                 {next.title}
               </h2>
               <p className="mt-2 text-[0.86rem] text-muted">{next.tagline}</p>
-              <span className="mt-6 inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-cyanic-400">
+              <span className="mt-6 inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-accent">
                 Read it
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>

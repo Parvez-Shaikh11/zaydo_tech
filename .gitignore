@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+# `node scripts/prep-photos.mjs --preview` flattens the keyed photos over grey
+# and over the dark canvas so the cut-out edge can be inspected. Throwaway.
+.preview
+
+# Raw generator exports. Each one was copied to a stable name beside it, and
+# those copies are what scripts/prep-photos.mjs reads — keeping both would put
+# ~7MB of exact duplicates in the history.
+photos/website_images/ChatGPT Image *
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth light">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/photos/mark-dark.png" />
+    <link rel="icon" type="image/png" href="/photos/mark-light.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#05070E" />
+    <meta name="theme-color" content="#F6F8FC" />
 
     <!-- SEO -->
     <title>Zaydo Tech — Custom Software, Automation & Digital Systems</title>
@@ -29,7 +29,7 @@
       (function () {
         try {
           var stored = localStorage.getItem('zaydo-theme');
-          var theme = stored || 'dark';
+          var theme = stored || 'light';
           var root = document.documentElement;
           root.classList.toggle('dark', theme === 'dark');
           root.classList.toggle('light', theme === 'light');

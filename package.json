@@ -8,14 +8,16 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "prep:logo": "node scripts/prep-logo.mjs"
+    "prep:logo": "node scripts/prep-logo.mjs",
+    "prep:photos": "node scripts/prep-photos.mjs"
   },
   "dependencies": {
     "framer-motion": "^13.1.0",
     "lucide-react": "^0.577.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.2"
+    "react-router-dom": "^7.18.2",
+    "simple-icons": "^16.28.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",

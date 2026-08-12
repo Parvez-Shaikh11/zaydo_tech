@@ -14,25 +14,31 @@ export default {
         ink: 'rgb(var(--c-ink) / <alpha-value>)',
         muted: 'rgb(var(--c-muted) / <alpha-value>)',
         faint: 'rgb(var(--c-faint) / <alpha-value>)',
+        /* Theme-aware accent: cyanic-600 in light (cyanic-400 is ~1.6:1 on
+           white), cyanic-400 in dark. Prefer this over a literal cyanic-400
+           for text and small UI. */
+        accent: 'rgb(var(--c-accent) / <alpha-value>)',
 
-        /* Brand — lifted straight off the logo gradient (royal blue -> cyan). */
+        /* Brand — sampled from the logo PNG itself, not eyeballed. The wordmark
+           is a gradient from #0059FD (its single most common pixel colour) up
+           to #00C9FD at the cyan end. */
         brand: {
-          50: '#ECF5FF',
-          100: '#D6EBFF',
-          200: '#AFD8FF',
-          300: '#7CBEFF',
-          400: '#3B9CFF',
-          500: '#1B72F5',
-          600: '#1354D8',
-          700: '#0F41AB',
-          800: '#0F3785',
-          900: '#122F68',
+          50: '#E8F1FF',
+          100: '#CFE3FF',
+          200: '#9FC6FF',
+          300: '#5CA5FF',
+          400: '#0086FD',
+          500: '#0059FD',
+          600: '#0047CC',
+          700: '#003A9E',
+          800: '#00307D',
+          900: '#042A63',
         },
         cyanic: {
-          300: '#67E8F9',
-          400: '#22D3EE',
-          500: '#06B6D4',
-          600: '#0891B2',
+          300: '#6EDCFF',
+          400: '#00C9FD',
+          500: '#00A7FD',
+          600: '#0086D6',
         },
       },
       fontFamily: {
@@ -47,7 +53,9 @@ export default {
       boxShadow: {
         glow: '0 0 0 1px rgb(var(--c-line) / 1), 0 24px 60px -24px rgba(27, 114, 245, 0.45)',
         'glow-lg': '0 30px 90px -30px rgba(6, 182, 212, 0.5)',
-        lift: '0 20px 50px -25px rgba(2, 8, 23, 0.55)',
+        lift: '0 20px 50px -25px rgb(var(--c-line) / 0.35)',
+        tile: 'var(--shadow-tile)',
+        'tile-hover': 'var(--shadow-tile-hover)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -95,6 +103,31 @@ export default {
         'spin-slow': {
           to: { transform: 'rotate(360deg)' },
         },
+        /* Ambient decoration loops. `drift` is tuned for 40rem blurred halos —
+           on a 120px shape it moves ~5px, so small shapes need their own. */
+        'sway-x': {
+          '0%,100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(50px)' },
+        },
+        'sway-y': {
+          '0%,100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-30px)' },
+        },
+        /* Distinct from `pulse-ring` (a 2.4s status dot that only decays):
+           this is a slow breathing ring that fades in before it fades out. */
+        ripple: {
+          '0%': { transform: 'scale(1)', opacity: '0' },
+          '50%': { transform: 'scale(1.4)', opacity: '0.4' },
+          '100%': { transform: 'scale(1.8)', opacity: '0' },
+        },
+        swing: {
+          '0%,100%': { transform: 'rotate(-6deg)' },
+          '50%': { transform: 'rotate(6deg)' },
+        },
+        morph: {
+          '0%,100%': { borderRadius: '42% 58% 63% 37% / 41% 44% 56% 59%' },
+          '50%': { borderRadius: '58% 42% 33% 67% / 62% 36% 64% 38%' },
+        },
       },
       animation: {
         float: 'float 6s ease-in-out infinite',
@@ -107,6 +140,12 @@ export default {
         'dash-flow': 'dash-flow 14s linear infinite',
         'scan-line': 'scan-line 5s linear infinite',
         'spin-slow': 'spin-slow 26s linear infinite',
+        'sway-x': 'sway-x 8s ease-in-out infinite',
+        'sway-y': 'sway-y 7s ease-in-out infinite',
+        ripple: 'ripple 5s ease-in-out infinite',
+        'ripple-slow': 'ripple 5s ease-in-out 2.5s infinite',
+        swing: 'swing 5s ease-in-out infinite',
+        morph: 'morph 8s ease-in-out infinite',
       },
     },
   },

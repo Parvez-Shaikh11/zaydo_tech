@@ -36,7 +36,7 @@ export const phases = [
   },
   {
     icon: Compass,
-    accent: '#3B9CFF',
+    accent: '#0086FD',
     title: 'Discovery',
     step: 'Understand before building',
     summary:
@@ -62,7 +62,7 @@ export const phases = [
   },
   {
     icon: FileText,
-    accent: '#1B72F5',
+    accent: '#0059FD',
     title: 'Strategy',
     step: 'Decide what to build',
     summary:
@@ -87,7 +87,7 @@ export const phases = [
   },
   {
     icon: Database,
-    accent: '#0891B2',
+    accent: '#0077FD',
     title: 'Architecture',
     step: 'Design the system',
     summary:
@@ -112,7 +112,7 @@ export const phases = [
   },
   {
     icon: PenTool,
-    accent: '#22D3EE',
+    accent: '#00C9FD',
     title: 'Design',
     step: 'Make it usable',
     summary:
@@ -138,7 +138,7 @@ export const phases = [
   },
   {
     icon: Cpu,
-    accent: '#1B72F5',
+    accent: '#0059FD',
     title: 'Engineering',
     step: 'Build it properly',
     summary:
@@ -163,7 +163,7 @@ export const phases = [
   },
   {
     icon: Bot,
-    accent: '#3B9CFF',
+    accent: '#0086FD',
     title: 'Automation & AI',
     step: 'Remove the manual work',
     summary:
@@ -188,7 +188,7 @@ export const phases = [
   },
   {
     icon: Rocket,
-    accent: '#22D3EE',
+    accent: '#00C9FD',
     title: 'Launch',
     step: 'Go live safely',
     summary:
@@ -269,7 +269,7 @@ export default function ProcessTimeline() {
             <motion.div
               className="w-full rounded-full"
               style={{
-                background: `linear-gradient(to bottom, #1B72F5, ${phase.accent})`,
+                background: `linear-gradient(to bottom, #0059FD, ${phase.accent})`,
               }}
               animate={{ height: `${progress}%` }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}

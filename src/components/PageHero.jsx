@@ -2,32 +2,28 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import PhotoStage from './ui/PhotoStage';
 
-/** Shared interior-page header so every route opens with the same rhythm. */
+/**
+ * Shared interior-page header so every route opens with the same rhythm.
+ *
+ * Pass `photo` (an entry from `data/images`) to get a split layout with the
+ * picture on the right; without it the copy runs full width exactly as before,
+ * so the pages that do not have artwork are unaffected.
+ */
 export default function PageHero({
   eyebrow,
   title,
   highlight,
   description,
   breadcrumb = [],
-  accent = '#1B72F5',
+  accent = '#0059FD',
+  photo,
   children,
 }) {
-  return (
-    <section className="relative overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20">
-      <div
-        aria-hidden
-        className="halo animate-float-slow"
-        style={{
-          width: '38rem',
-          height: '38rem',
-          top: '-14rem',
-          right: '-10rem',
-          background: `${accent}2e`,
-        }}
-      />
+  const copy = (
+    <>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {breadcrumb.length > 0 && (
           <motion.nav
             initial={{ opacity: 0, y: 10 }}
@@ -39,7 +35,7 @@ export default function PageHero({
               <React.Fragment key={crumb.label}>
                 {i > 0 && <ChevronRight className="h-3 w-3 opacity-50" />}
                 {crumb.to ? (
-                  <Link to={crumb.to} className="transition-colors hover:text-cyanic-400">
+                  <Link to={crumb.to} className="transition-colors hover:text-accent">
                     {crumb.label}
                   </Link>
                 ) : (
@@ -107,6 +103,39 @@ export default function PageHero({
           >
             {children}
           </motion.div>
+        )}
+    </>
+  );
+
+  return (
+    <section className="relative overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20">
+      <div
+        aria-hidden
+        className="halo animate-float-slow"
+        style={{
+          width: '38rem',
+          height: '38rem',
+          top: '-14rem',
+          right: '-10rem',
+          background: `${accent}2e`,
+        }}
+      />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {photo ? (
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-6">{copy}</div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-6 lg:-mr-4 xl:-mr-10"
+            >
+              <PhotoStage photo={photo} accent={accent} layout="wide" priority />
+            </motion.div>
+          </div>
+        ) : (
+          copy
         )}
       </div>
     </section>

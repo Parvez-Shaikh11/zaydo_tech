@@ -1,4 +1,5 @@
 import { Code2, LayoutDashboard, Workflow, BrainCircuit, Globe2 } from 'lucide-react';
+import { artwork } from './images';
 
 /**
  * The five capabilities. Each entry is the single source of truth for:
@@ -6,6 +7,22 @@ import { Code2, LayoutDashboard, Workflow, BrainCircuit, Globe2 } from 'lucide-r
  *   - the /services overview
  *   - the /services/:slug detail page
  *   - the Work page's service filter (via `projects[].serviceId`)
+ *
+ * `accent` is the tint used for halos, borders and icon plates. All five sit in
+ * the logo's blue family — the earlier teal/cyan accents made the card row look
+ * like it belonged to two different brands.
+ *
+ * `fillFrom` / `fillTo` are a SEPARATE, darker pair used only for the card
+ * colour-fill hover, where white text sits on top. They are deliberately NOT
+ * derived from `accent`: the lighter accents fail WCAG AA against white
+ * (#0086FD -> 2.6:1). The pair below clears 4.5:1, and is identical across all
+ * five so every card floods to the same brand blue.
+ *
+ * `image` is either purpose-made `artwork` or a stock `renders` entry. Artwork
+ * arrives already branded, so it sets `grade: ''` — the colour filter and the
+ * accent tint are both skipped and it renders exactly as supplied.
+ * `imageAspect` overrides the block frame's default 4:3 where the artwork is
+ * shot to a different shape and would otherwise be cropped at the sides.
  */
 export const servicesData = [
   {
@@ -14,9 +31,12 @@ export const servicesData = [
     title: 'Custom Software Development',
     short: 'Custom Software',
     icon: Code2,
-    accent: '#1B72F5',
-    image: '/photos/hero_3d.png',
-    grade: 'brand-grade',
+    accent: '#0059FD',
+    fillFrom: '#0059FD',
+    fillTo: '#003A9E',
+    image: artwork.customSoftware,
+    imageAspect: 'aspect-[3/2]',
+    grade: '',
     tagline: 'Software shaped around how your business actually runs.',
     description:
       'Off-the-shelf software forces your team to work the way the vendor imagined. We do the opposite: we study your real workflow, then engineer a system around it — one database, one source of truth, one place where operations live.',
@@ -71,9 +91,12 @@ export const servicesData = [
     title: 'Web Application Development',
     short: 'Web Applications',
     icon: LayoutDashboard,
-    accent: '#0891B2',
-    image: '/photos/software_3d.png',
-    grade: 'brand-grade',
+    accent: '#0077FD',
+    fillFrom: '#0059FD',
+    fillTo: '#003A9E',
+    image: artwork.webApplications,
+    imageAspect: 'aspect-[3/2]',
+    grade: '',
     tagline: 'Dashboards, portals and SaaS interfaces built to stay fast under load.',
     description:
       'A web application is judged in the first two seconds. We build decoupled front-ends against clean APIs, cache aggressively at the edge, and design the interface so a new user can complete the core task without being trained.',
@@ -128,9 +151,12 @@ export const servicesData = [
     title: 'Workflow Automation',
     short: 'Automation',
     icon: Workflow,
-    accent: '#3B9CFF',
-    image: '/photos/automation_3d.png',
-    grade: 'brand-grade-warm',
+    accent: '#0086FD',
+    fillFrom: '#0059FD',
+    fillTo: '#003A9E',
+    image: artwork.automation,
+    imageAspect: 'aspect-[3/2]',
+    grade: '',
     tagline: 'Remove the repetitive work between your systems.',
     description:
       'Most operational drag is not one broken tool — it is the manual bridge between two working tools. We map where data is being re-keyed, then build the pipeline that moves it: validated, logged, retried on failure and visible when something needs a human.',
@@ -185,9 +211,12 @@ export const servicesData = [
     title: 'Practical AI Integration',
     short: 'AI Systems',
     icon: BrainCircuit,
-    accent: '#22D3EE',
-    image: '/photos/ai_3d.png',
-    grade: 'brand-grade-green',
+    accent: '#00A7FD',
+    fillFrom: '#0059FD',
+    fillTo: '#003A9E',
+    image: artwork.aiSystems,
+    imageAspect: 'aspect-[3/2]',
+    grade: '',
     tagline: 'AI applied where it measurably helps — and nowhere else.',
     description:
       'We treat AI as one component in a system, not as the product. If a rule engine solves the problem more reliably, we say so. Where language models genuinely fit — unstructured documents, search over internal knowledge, classification at volume — we build them into the workflow with grounding, validation and a human review path.',
@@ -242,10 +271,16 @@ export const servicesData = [
     title: 'Websites & Digital Platforms',
     short: 'Digital Platforms',
     icon: Globe2,
-    accent: '#7CBEFF',
-    image: '/photos/software_3d.png',
-    grade: 'brand-grade',
-    imagePosition: 'object-right',
+    accent: '#0047CC',
+    fillFrom: '#0059FD',
+    fillTo: '#003A9E',
+    image: artwork.digitalPlatforms,
+    /* 16:9 artwork. The arch shapes carry a 14rem corner radius, which on a
+       frame this short would swallow most of the picture — so this one gets a
+       plain generous rounding instead. */
+    imageAspect: 'aspect-[16/9]',
+    imageShape: 'rounded-[2.5rem]',
+    grade: '',
     tagline: 'The digital front door serious clients judge you by.',
     description:
       'For most businesses the website is the first and sometimes only impression a prospective client forms. We engineer sites that load instantly, read credibly, and are structured so that the enquiry a visitor sends actually contains enough information to act on.',

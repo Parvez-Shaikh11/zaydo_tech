@@ -62,14 +62,16 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[60] px-3 pt-3 sm:px-5 sm:pt-5">
+      {/* Deliberately tight at the top — a larger inset read as a gap above the
+          header rather than as a floating bar. */}
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[60] px-3 pt-1.5 sm:px-5 sm:pt-2">
         <motion.header
           initial={{ y: -90, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className={`pointer-events-auto mx-auto flex max-w-7xl items-center justify-between rounded-full px-4 transition-all duration-500 sm:px-6 ${
             scrolled
-              ? 'glass-nav h-16 shadow-[0_18px_50px_-28px_rgba(0,0,0,0.85)]'
+              ? 'glass-nav h-16 shadow-[0_18px_50px_-28px_var(--shadow-nav)]'
               : 'h-[4.5rem] border border-transparent bg-transparent'
           }`}
         >
@@ -97,7 +99,7 @@ export default function Navbar() {
                       <motion.span
                         layoutId="nav-active-pill"
                         transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                        className="absolute inset-0 -z-10 rounded-full border border-brand-500/30 bg-brand-500/12"
+                        className="absolute inset-0 -z-10 rounded-full border border-brand-500/40 bg-brand-500/[0.16]"
                       />
                     )}
                     {link.name}
@@ -127,7 +129,7 @@ export default function Navbar() {
                               {servicesData.map((service) => (
                                 <Link
                                   key={service.id}
-                                  to={`/services/${service.id}`}
+                                  to={`/services#${service.id}`}
                                   className="group flex items-start gap-3 rounded-2xl p-3 transition-colors duration-300 hover:bg-line/[0.06]"
                                 >
                                   <span
@@ -153,7 +155,7 @@ export default function Navbar() {
                             </div>
                             <Link
                               to="/services"
-                              className="mt-1 flex items-center justify-between rounded-2xl bg-line/[0.04] px-4 py-3 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-cyanic-400 transition-colors hover:bg-line/[0.08]"
+                              className="text-accent mt-1 flex items-center justify-between rounded-2xl bg-line/[0.04] px-4 py-3 text-[0.7rem] font-bold uppercase tracking-[0.14em] transition-colors hover:bg-line/[0.08]"
                             >
                               View all capabilities
                               <ArrowRight className="h-3.5 w-3.5" />
@@ -254,7 +256,7 @@ export default function Navbar() {
                         onClick={() => setMobileOpen(false)}
                         className={`flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold uppercase tracking-[0.12em] transition-colors ${
                           isActive(link.path)
-                            ? 'bg-brand-500/12 text-cyanic-400'
+                            ? 'bg-brand-500/12 text-accent'
                             : 'text-muted hover:bg-line/[0.05] hover:text-ink'
                         }`}
                       >

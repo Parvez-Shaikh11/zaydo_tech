@@ -3,7 +3,9 @@ import { Mail, MapPin, MessageSquare, ShieldCheck } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import ContactWizard from '../components/ContactWizard';
 import Reveal from '../components/ui/Reveal';
+import Texture from '../components/ui/Texture';
 import { site } from '../data/site';
+import { photos } from '../data/images';
 
 const assurances = [
   {
@@ -32,14 +34,43 @@ export default function Contact() {
         highlight="you're building."
         description="Have an idea, a business challenge, or a process that could work better with the right system behind it? Describe it in your own words — the form below is structured so that your answers give us enough to respond usefully."
         breadcrumb={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
+        photo={photos.contactCall}
       />
 
-      <div className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+      {/* The form band gets its own ground and pattern — left plain it read as
+          a wall of white boxes floating on a white page. */}
+      <div className="band-tint relative isolate border-t border-line/[0.06] py-14 sm:py-20">
+        <Texture pattern="hex" opacity={0.3} fade="center" className="text-brand-500" />
+        <span
+          aria-hidden
+          className="halo animate-float-slow"
+          style={{
+            width: '34rem',
+            height: '34rem',
+            top: '-8rem',
+            left: '-12rem',
+            background: 'rgba(0, 89, 253, 0.16)',
+          }}
+        />
+        <span
+          aria-hidden
+          className="halo animate-float-slow"
+          style={{
+            width: '28rem',
+            height: '28rem',
+            bottom: '-10rem',
+            right: '-8rem',
+            background: 'rgba(0, 201, 253, 0.14)',
+            animationDelay: '-5s',
+          }}
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           {/* ------------------------------------------------------ aside */}
           <div className="lg:col-span-4">
-            <Reveal className="surface sticky top-28 rounded-3xl p-7">
-              <h2 className="eyebrow text-cyanic-400">What to expect</h2>
+            <Reveal className="tile sticky top-28 p-7">
+              <h2 className="eyebrow text-accent">What to expect</h2>
 
               <ul className="mt-7 space-y-6">
                 {assurances.map((item) => {
@@ -63,7 +94,7 @@ export default function Contact() {
               <div className="mt-8 space-y-3 border-t border-line/[0.08] pt-7">
                 <a
                   href={`mailto:${site.email}`}
-                  className="flex items-center gap-3 text-[0.86rem] text-muted transition-colors hover:text-cyanic-400"
+                  className="flex items-center gap-3 text-[0.86rem] text-muted transition-colors hover:text-accent"
                 >
                   <Mail className="h-4 w-4 shrink-0" />
                   {site.email}
@@ -85,6 +116,7 @@ export default function Contact() {
           <div className="lg:col-span-8">
             <ContactWizard />
           </div>
+        </div>
         </div>
       </div>
     </div>

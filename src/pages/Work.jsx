@@ -14,7 +14,7 @@ export default function Work() {
 
   const filters = useMemo(
     () => [
-      { id: 'all', label: 'All work', icon: LayoutGrid, accent: '#1B72F5' },
+      { id: 'all', label: 'All work', icon: LayoutGrid, accent: '#0059FD' },
       ...servicesData
         .filter((s) => projects.some((p) => p.serviceId === s.id))
         .map((s) => ({ id: s.id, label: s.short, icon: s.icon, accent: s.accent })),
@@ -76,7 +76,7 @@ export default function Work() {
         </div>
       </PageHero>
 
-      <div className="mx-auto max-w-7xl space-y-24 px-4 sm:px-6 sm:space-y-32 lg:px-8">
+      <div className="mx-auto max-w-7xl section-rhythm px-4 sm:px-6 lg:px-8">
         {/* ------------------------------------------------- featured */}
         {filter === 'all' && (
           <Stagger>
@@ -115,7 +115,7 @@ export default function Work() {
 
         {/* ------------------------------------------------ honesty note */}
         <section className="surface rounded-3xl p-7 sm:p-10">
-          <h2 className="eyebrow text-cyanic-400">How to read this portfolio</h2>
+          <h2 className="eyebrow text-accent">How to read this portfolio</h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-3">
             {[
               {

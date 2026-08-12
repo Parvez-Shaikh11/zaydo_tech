@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
  * Entrance is driven by framer-motion (links draw, nodes pop in); the steady
  * state loop — packets travelling the links — is SMIL, so it costs no JS.
  */
-export default function SystemDiagram({ nodes, links, accent = '#22D3EE', className = '' }) {
+export default function SystemDiagram({ nodes, links, accent = '#00C9FD', className = '' }) {
   const uid = useId().replace(/:/g, '');
 
   const pathFor = (link) => {

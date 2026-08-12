@@ -13,9 +13,12 @@ export const site = {
 export const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Services', path: '/services', hasMenu: true },
-  { name: 'Solutions', path: '/solutions' },
+  // Hidden from the header for now — uncomment to bring it back. The /solutions
+  // route and page are still in place, so the URL keeps working meanwhile.
+  // { name: 'Solutions', path: '/solutions' },
   { name: 'Work', path: '/work' },
   { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 /**

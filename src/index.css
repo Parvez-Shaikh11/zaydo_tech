@@ -4,50 +4,114 @@
 
 /* ==========================================================================
    THEME TOKENS
-   Dark is the default (it is the brand's native environment). Light exists
-   because a large share of enterprise buyers read proposals, print pages and
-   forward screenshots — and the brand ships an official light logo lockup.
+   Light is the default — it is what most visitors and enterprise buyers see,
+   and the flat-card design language reads natively on it. Dark remains a
+   first-class mode behind the navbar toggle.
+
+   Order matters: `html.dark` must come LAST. Both selectors are single-class
+   specificity, so source order is what decides the winner.
    ========================================================================== */
 
 :root,
+html.light {
+  --c-canvas: 246 248 252;   /* page background            */
+  --c-panel: 255 255 255;    /* cards / surfaces           */
+  --c-raised: 248 250 253;   /* hovered / elevated surface */
+  --c-line: 15 23 42;        /* border base (used w/ alpha)*/
+  --c-ink: 11 18 32;         /* primary text               */
+  --c-muted: 71 85 105;      /* secondary text             */
+  --c-faint: 122 136 156;    /* tertiary / meta text       */
+
+  --line-alpha: 0.11;
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --grid-image: linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+  /* Kept very low on a near-white canvas: at the previous 0.10–0.16 these
+     46rem blurs read as large coloured smudges rather than ambience. */
+  --halo-1: rgba(0, 89, 253, 0.055);
+  --halo-2: rgba(0, 167, 253, 0.045);
+  --halo-3: rgba(99, 102, 241, 0.035);
+  --noise-opacity: 0.018;
+  /* Texture inks — used by the .texture-* utilities below. */
+  --tex-ink: 15 23 42;
+  --tex-alpha: 0.02;
+  --tex-alpha-strong: 0.035;
+  --hero-halo-alpha: 0.1;
+  /* mix-blend-color wash over the 3D renders. On a white surround the dark
+     renders desaturate into mush at the dark-mode strength. */
+  --img-tint-alpha: 0.16;
+  --shadow-card: 0 10px 30px -8px rgba(11, 18, 32, 0.1);
+
+  /* --- flat "tile" card language (Webteck-style) ----------------------- */
+  --radius-tile: 1rem;
+  --radius-tile-lg: 1.5rem;
+  --shadow-tile: 0 10px 30px -6px rgb(11 18 32 / 0.08),
+    0 2px 6px -2px rgb(11 18 32 / 0.05);
+  --shadow-tile-hover: 0 18px 40px -10px rgb(0 89 253 / 0.22),
+    0 6px 14px -6px rgb(11 18 32 / 0.08);
+  /* Light mode gets Webteck's borderless treatment: shadow alone separates
+     the card from the canvas. */
+  --tile-line-alpha: 0;
+
+  --sheen-color: rgba(0, 89, 253, 0.1);
+  --shadow-menu: rgba(15, 23, 42, 0.16);
+  --shadow-nav: rgba(15, 23, 42, 0.22);
+  --watermark: rgb(0 89 253 / 0.1);
+  --img-scrim: 0.35;
+  --focus-ring: #0059FD;
+  /* Accent for links, eyebrows and small UI. cyanic-400 (#00C9FD) sits at
+     ~1.6:1 on white, so light mode drops to cyanic-600 (#0086D6). */
+  --c-accent: 0 134 214;
+  /* Project status tones. The -400 shades read at ~1.9:1 on white, so light
+     mode uses the -600 shades. */
+  --tone-live: 5 150 105;
+  --tone-concept: 180 83 9;
+  --tone-rnd: 109 40 217;
+}
+
 html.dark {
-  --c-canvas: 5 7 14;        /* page background            */
-  --c-panel: 10 15 28;       /* cards / surfaces           */
-  --c-raised: 16 23 42;      /* hovered / elevated surface */
-  --c-line: 255 255 255;     /* border base (used w/ alpha)*/
-  --c-ink: 241 245 249;      /* primary text               */
-  --c-muted: 148 163 184;    /* secondary text             */
-  --c-faint: 100 116 139;    /* tertiary / meta text       */
+  --c-canvas: 5 7 14;
+  --c-panel: 10 15 28;
+  --c-raised: 16 23 42;
+  --c-line: 255 255 255;
+  --c-ink: 241 245 249;
+  --c-muted: 148 163 184;
+  --c-faint: 100 116 139;
 
   --line-alpha: 0.09;
   --glass-bg: rgba(10, 15, 28, 0.62);
   --grid-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  --halo-1: rgba(27, 114, 245, 0.22);
-  --halo-2: rgba(6, 182, 212, 0.16);
-  --halo-3: rgba(59, 156, 255, 0.12);
+  --halo-1: rgba(0, 89, 253, 0.22);
+  --halo-2: rgba(0, 167, 253, 0.16);
+  --halo-3: rgba(0, 134, 253, 0.12);
   --noise-opacity: 0.05;
+  --tex-ink: 255 255 255;
+  --tex-alpha: 0.022;
+  --tex-alpha-strong: 0.04;
+  --hero-halo-alpha: 0.32;
+  --img-tint-alpha: 0.45;
   --shadow-card: 0 24px 60px -32px rgba(0, 0, 0, 0.9);
-}
 
-html.light {
-  --c-canvas: 246 248 252;
-  --c-panel: 255 255 255;
-  --c-raised: 248 250 253;
-  --c-line: 15 23 42;
-  --c-ink: 11 18 32;
-  --c-muted: 71 85 105;
-  --c-faint: 122 136 156;
+  --radius-tile: 1rem;
+  --radius-tile-lg: 1.5rem;
+  --shadow-tile: 0 10px 30px -8px rgb(0 0 0 / 0.6);
+  --shadow-tile-hover: 0 20px 44px -12px rgb(0 167 253 / 0.28),
+    0 10px 24px -10px rgb(0 0 0 / 0.7);
+  /* On near-black a shadow is invisible, so the hairline is the only thing
+     separating card from canvas. */
+  --tile-line-alpha: 0.08;
 
-  --line-alpha: 0.11;
-  --glass-bg: rgba(255, 255, 255, 0.78);
-  --grid-image: linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
-  --halo-1: rgba(27, 114, 245, 0.16);
-  --halo-2: rgba(6, 182, 212, 0.14);
-  --halo-3: rgba(99, 102, 241, 0.1);
-  --noise-opacity: 0.03;
-  --shadow-card: 0 22px 50px -30px rgba(15, 23, 42, 0.35);
+  --sheen-color: rgba(255, 255, 255, 0.07);
+  --shadow-menu: rgba(0, 0, 0, 0.55);
+  --shadow-nav: rgba(0, 0, 0, 0.85);
+  --watermark: rgb(255 255 255 / 0.05);
+  --img-scrim: 0.6;
+  --focus-ring: #00C9FD;
+  --c-accent: 0 201 253;
+  --tone-live: 52 211 153;
+  --tone-concept: 251 191 36;
+  --tone-rnd: 167 139 250;
 }
 
 @layer base {
@@ -73,7 +137,7 @@ html.light {
   }
 
   ::selection {
-    background: rgba(6, 182, 212, 0.28);
+    background: rgba(0, 167, 253, 0.24);
     color: rgb(var(--c-ink));
   }
 
@@ -84,10 +148,10 @@ html.light {
     border-radius: 99px;
     border: 2px solid rgb(var(--c-canvas));
   }
-  ::-webkit-scrollbar-thumb:hover { background: #1B72F5; }
+  ::-webkit-scrollbar-thumb:hover { background: #0059FD; }
 
   :focus-visible {
-    outline: 2px solid #22D3EE;
+    outline: 2px solid var(--focus-ring);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -117,8 +181,213 @@ html.light {
   }
   .surface-hover:hover {
     transform: translateY(-6px);
-    border-color: rgba(27, 114, 245, 0.42);
-    box-shadow: var(--shadow-card), 0 24px 60px -28px rgba(27, 114, 245, 0.55);
+    border-color: rgba(0, 89, 253, 0.42);
+    box-shadow: var(--shadow-card), 0 24px 60px -28px rgba(0, 89, 253, 0.55);
+  }
+
+  /* Flat, opaque card. Deliberately NOT `.surface` — that paints with a
+     translucent background-image + backdrop-blur, which several sections rely
+     on to let ambient layers (CircuitField, DataLanes, gradient washes) show
+     through. `.tile` is additive so both languages can coexist during the
+     migration. */
+  .tile {
+    background-color: rgb(var(--c-panel));
+    border: 1px solid rgb(var(--c-line) / var(--tile-line-alpha));
+    border-radius: var(--radius-tile);
+    box-shadow: var(--shadow-tile);
+    transition: background-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
+      transform 0.4s ease-in-out, border-color 0.4s ease-in-out, color 0.4s ease-in-out;
+  }
+
+  /* Shadow only — deliberately NO transform. Most cards carrying this also
+     carry framer's `staggerItem` variants, and framer writes an inline
+     `transform` that would silently beat a CSS hover transform on the same
+     node. Where a lift is wanted, add `hover:-translate-y-1.5` on an inner
+     element that framer does not animate. */
+  .tile-hover:hover {
+    box-shadow: var(--shadow-tile-hover);
+    border-color: rgb(0 89 253 / 0.28);
+  }
+
+  /* --- the signature colour-fill hover ---------------------------------- */
+  /* A brand gradient wipes up from the bottom edge, exactly like the
+     reference's scaleY(0) -> scaleY(1) fill. Text/icon inversion is done with
+     `group-hover:` in JSX, matching how every other hover in this codebase
+     already works. */
+  /* No overflow:hidden here — the `grid` variant hangs its icon plate outside
+     the top edge, and clipping the card would slice it in half. The gradient
+     and the shape wash are contained by their own border-radius instead. */
+  .fill-card {
+    position: relative;
+    isolation: isolate;
+  }
+  .fill-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: -1;
+    /* Two layers: a diagonal texture over the brand gradient, so the filled
+       card has a surface rather than reading as a flat block of colour. */
+    background-image: repeating-linear-gradient(
+        -52deg,
+        rgb(255 255 255 / 0.07) 0 38px,
+        transparent 38px 90px
+      ),
+      radial-gradient(circle at 78% 8%, rgb(255 255 255 / 0.16), transparent 55%),
+      linear-gradient(135deg, var(--fill-from, #0059FD) 0%, var(--fill-to, #0086D6) 100%);
+    /* Rises into place and fades in TOGETHER, rather than wiping up from the
+       bottom edge. A scaleY wipe leaves the top of the card white for most of
+       the transition while the heading has already turned white — the title
+       vanished for ~250ms every time the pointer crossed a card. */
+    transform: translateY(12%);
+    opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease-out;
+    pointer-events: none;
+  }
+  .fill-card:hover::before,
+  .fill-card:focus-within::before {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* --- corner-origin fill -------------------------------------------------
+     A quarter-disc sits in the bottom-right corner and, on hover, scales up
+     from that corner until it covers the card. The curved leading edge stays
+     visible as it sweeps across, which is what makes it read as ink spreading
+     rather than a rectangle fading in. */
+  .fill-corner {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .fill-corner::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 100% 0 0 0;
+    background-image: radial-gradient(
+        circle at 85% 90%,
+        rgb(255 255 255 / 0.14),
+        transparent 60%
+      ),
+      linear-gradient(135deg, var(--fill-from, #0059FD) 0%, var(--fill-to, #003A9E) 100%);
+    transform: scale(1);
+    transform-origin: bottom right;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  /* 7rem quarter-disc x 7 comfortably covers the tallest card. */
+  .fill-corner:hover::before,
+  .fill-corner:focus-within::before {
+    transform: scale(7);
+  }
+
+  /* Everything inside the card is driven from here rather than from inline
+     `style` props. An inline style outranks every class, so `group-hover:*`
+     utilities silently lost against it — which is why the plate never turned
+     white and the icon vanished blue-on-blue. The consumer sets only the
+     custom properties; these rules own the states. */
+  .fc-plate {
+    background-color: var(--svc-tint);
+    color: var(--svc-accent);
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+  }
+  .fill-corner:hover .fc-plate,
+  .fill-corner:focus-within .fc-plate {
+    background-color: #fff;
+    color: var(--fill-from);
+  }
+
+  /* The dot's ring is what cuts the notch out of the plate: on a tinted plate
+     the ring is the card surface, and once the card floods it becomes the fill
+     colour so a white dot still reads as separate from a white plate. */
+  .fc-dot {
+    background-color: var(--svc-accent);
+    box-shadow: 0 0 0 3px rgb(var(--c-panel));
+    transition: background-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+  }
+  .fill-corner:hover .fc-dot,
+  .fill-corner:focus-within .fc-dot {
+    background-color: #fff;
+    box-shadow: 0 0 0 3px var(--fill-from);
+  }
+
+  .fc-title {
+    color: rgb(var(--c-ink));
+    transition: color 0.4s ease-in-out;
+  }
+  .fc-body {
+    color: rgb(var(--c-muted));
+    transition: color 0.4s ease-in-out;
+  }
+  .fill-corner:hover .fc-title,
+  .fill-corner:focus-within .fc-title {
+    color: #fff;
+  }
+  .fill-corner:hover .fc-body,
+  .fill-corner:focus-within .fc-body {
+    color: rgb(255 255 255 / 0.88);
+  }
+
+  .fc-btn {
+    background-color: rgb(var(--c-line) / 0.06);
+    color: rgb(var(--c-ink));
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+  }
+  .fill-corner:hover .fc-btn,
+  .fill-corner:focus-within .fc-btn {
+    background-color: #fff;
+    color: var(--fill-from);
+  }
+
+  .fc-num {
+    color: var(--watermark);
+    transition: color 0.4s ease-in-out;
+  }
+  .fill-corner:hover .fc-num,
+  .fill-corner:focus-within .fc-num {
+    color: rgb(255 255 255 / 0.24);
+  }
+
+  /* The reference's `.bg-shape`: a decoration parked below the card that slides
+     up as the fill lands. `.fill-shape` is the clipping frame (so the card
+     itself can stay unclipped); its child is the thing that moves. */
+  .fill-shape {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .fill-shape > * {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease-out;
+  }
+  .fill-card:hover .fill-shape > *,
+  .fill-card:focus-within .fill-shape > * {
+    opacity: 0.18;
+    transform: translateY(0);
+  }
+
+  /* Oversized number watermark (reference: 100px/700 at .3 opacity). */
+  .watermark {
+    color: var(--watermark);
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.4s ease-in-out;
+  }
+  .fill-card:hover .watermark {
+    color: rgb(255 255 255 / 0.22);
   }
 
   .glass-nav {
@@ -134,7 +403,7 @@ html.light {
     background: rgb(var(--c-panel));
     border: 1px solid rgb(var(--c-line) / 0.12);
     box-shadow:
-      0 32px 80px -28px rgba(0, 0, 0, 0.55),
+      0 32px 80px -28px var(--shadow-menu),
       0 0 0 1px rgb(var(--c-line) / 0.04);
   }
 
@@ -148,7 +417,7 @@ html.light {
   }
 
   .text-brand-gradient {
-    background: linear-gradient(110deg, #3B9CFF 0%, #22D3EE 45%, #1B72F5 100%);
+    background: linear-gradient(110deg, #0086FD 0%, #00C9FD 45%, #0059FD 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -177,13 +446,13 @@ html.light {
 
   .btn-primary {
     color: #fff;
-    background-image: linear-gradient(115deg, #1B72F5 0%, #0891B2 50%, #1B72F5 100%);
+    background-image: linear-gradient(115deg, #0059FD 0%, #0086D6 50%, #0059FD 100%);
     background-size: 200% auto;
-    box-shadow: 0 12px 34px -14px rgba(27, 114, 245, 0.85);
+    box-shadow: 0 12px 34px -14px rgba(0, 89, 253, 0.85);
   }
   .btn-primary:hover {
     background-position: right center;
-    box-shadow: 0 18px 44px -14px rgba(6, 182, 212, 0.9);
+    box-shadow: 0 18px 44px -14px rgba(0, 167, 253, 0.9);
     transform: translateY(-2px);
   }
 
@@ -194,8 +463,197 @@ html.light {
   }
   .btn-ghost:hover {
     background-color: rgb(var(--c-line) / 0.1);
-    border-color: rgba(27, 114, 245, 0.5);
+    border-color: rgba(0, 89, 253, 0.5);
     transform: translateY(-2px);
+  }
+
+  /* Section rhythm — one place to tune vertical spacing across every page.
+     80px mobile / 120px desktop, matching the reference. Tighter than the
+     previous space-y-28/36, which is correct: whitespace reads larger on a
+     light canvas. */
+  .section-rhythm > * + * {
+    margin-top: 5rem;
+  }
+  @media (min-width: 640px) {
+    .section-rhythm > * + * {
+      margin-top: 7.5rem;
+    }
+  }
+
+  /* --- section textures --------------------------------------------------
+     The reference gives every band its own surface treatment rather than one
+     flat colour. These are deliberately near-invisible in isolation — they
+     read as "the paper has a grain", not "there is a pattern here". Each one
+     inks from --tex-ink so it inverts correctly in dark mode. */
+
+  /* Wide diagonal bands — the reference's signature background wash. */
+  .texture-diagonal {
+    background-image: repeating-linear-gradient(
+      -52deg,
+      rgb(var(--tex-ink) / var(--tex-alpha)) 0 62px,
+      transparent 62px 150px
+    );
+  }
+
+  /* Fine diagonal hatching, for narrower bands and cards. */
+  .texture-hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgb(var(--tex-ink) / var(--tex-alpha)) 0 1px,
+      transparent 1px 9px
+    );
+  }
+
+  .texture-dots {
+    background-image: radial-gradient(
+      rgb(var(--tex-ink) / var(--tex-alpha-strong)) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  .texture-grid {
+    background-image: linear-gradient(rgb(var(--tex-ink) / var(--tex-alpha)) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--tex-ink) / var(--tex-alpha)) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* Soft concentric rings — used behind hero copy. */
+  .texture-rings {
+    background-image: repeating-radial-gradient(
+      circle at center,
+      rgb(var(--tex-ink) / var(--tex-alpha)) 0 1px,
+      transparent 1px 46px
+    );
+  }
+
+  /* --- organic image shapes ----------------------------------------------
+     The reference frames its photography in soft irregular shapes rather than
+     plain rectangles. Done with asymmetric border-radius (not clip-path) so
+     the shape still clips child overlays and casts a matching box-shadow. */
+  .shape-blob {
+    border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;
+  }
+  .shape-blob-alt {
+    border-radius: 42% 58% 63% 37% / 55% 40% 60% 45%;
+  }
+  .shape-leaf {
+    border-radius: 62% 38% 62% 38% / 38% 62% 38% 62%;
+  }
+  .shape-arch {
+    border-radius: 14rem 14rem 1.5rem 1.5rem;
+  }
+  .shape-arch-alt {
+    border-radius: 1.5rem 14rem 1.5rem 14rem;
+  }
+  /* Pair any of the above with `animate-morph` for a slow organic wobble. */
+
+  /* --- section bands ------------------------------------------------------
+     Alternating surfaces so consecutive sections do not blur into one page. */
+  .band-tint {
+    background-color: rgb(var(--c-line) / 0.028);
+  }
+
+  /* --- technology capsules ------------------------------------------------
+     Three states, and blue always means "this one is called out":
+       idle          neutral, but fully legible — nothing is ever dimmed out
+       in-layer      brand blue, so picking a layer tab actually shows you
+                     which technologies belong to it
+       hovered       brand blue too, one step brighter when it is also in-layer
+
+     The earlier version faded out-of-layer capsules to 40% opacity, which made
+     two thirds of the field unreadable, and then marked the in-layer ones with
+     a ring so faint you could not tell the layers apart at all. */
+  .tech-capsule {
+    background-color: rgb(255 255 255 / 0.07);
+    color: #fff;
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.14),
+      0 8px 22px -14px rgb(0 0 0 / 0.9);
+    transition:
+      background-color 0.28s ease,
+      box-shadow 0.28s ease,
+      color 0.28s ease;
+  }
+
+  .tech-capsule[data-layer='on'],
+  .tech-capsule:hover,
+  .tech-capsule:focus-visible {
+    background-color: #0059FD;
+    box-shadow:
+      inset 0 0 0 1px #5CA5FF,
+      0 14px 30px -14px rgb(0 89 253 / 0.8);
+    outline: none;
+  }
+
+  /* Already blue, so hovering a member of the active layer lifts it a shade
+     rather than doing nothing. */
+  .tech-capsule[data-layer='on']:hover,
+  .tech-capsule[data-layer='on']:focus-visible {
+    background-color: #0086FD;
+    box-shadow:
+      inset 0 0 0 1px #9FC6FF,
+      0 18px 38px -14px rgb(0 134 253 / 0.9);
+  }
+
+  /* The glyph carries its own brand colour, passed in as a custom property so
+     these rules can win — an inline `style` colour could not be overridden. */
+  .tech-capsule__icon {
+    background-color: rgb(255 255 255 / 0.1);
+    color: var(--cap-icon, #0086FD);
+    transition: background-color 0.28s ease, color 0.28s ease;
+  }
+  .tech-capsule[data-layer='on'] .tech-capsule__icon,
+  .tech-capsule:hover .tech-capsule__icon,
+  .tech-capsule:focus-visible .tech-capsule__icon {
+    background-color: rgb(255 255 255 / 0.22);
+    /* white, not the brand hue: several marks (Express, Vercel, Prisma) are
+       already near-white and would disappear against the blue fill */
+    color: #fff;
+  }
+
+  /* Dark full-bleed band. Remaps the semantic tokens rather than overriding
+     `.text-ink` & friends directly — that way a white `.tile` sitting on the
+     band can restore them below and its text does not turn white-on-white. */
+  .band-dark {
+    background-color: #0B1327;
+    --c-ink: 255 255 255;
+    --c-muted: 203 213 225;
+    --c-faint: 148 163 184;
+    --c-line: 255 255 255;
+    --line-alpha: 0.1;
+    --tex-ink: 255 255 255;
+    --tex-alpha: 0.03;
+    --tex-alpha-strong: 0.05;
+    /* Light mode drops the accent to cyanic-600 for contrast on white; on this
+       band it sits on near-black, so take the bright shade back. */
+    --c-accent: 0 201 253;
+    color: rgb(var(--c-ink));
+  }
+
+  /* `--c-panel` is deliberately NOT remapped: in light mode cards on this band
+     stay white, in dark mode they stay dark. The ink has to follow the card,
+     not the band — hence the two theme-scoped resets below. Without them the
+     band's white ink leaks into a white card. */
+  html.light .band-dark .tile {
+    --c-ink: 11 18 32;
+    --c-muted: 71 85 105;
+    --c-faint: 122 136 156;
+    --c-line: 15 23 42;
+    --tex-ink: 15 23 42;
+    --tex-alpha: 0.02;
+    --tex-alpha-strong: 0.035;
+    color: rgb(var(--c-ink));
+  }
+  html.dark .band-dark .tile {
+    --c-ink: 241 245 249;
+    --c-muted: 148 163 184;
+    --c-faint: 100 116 139;
+    --c-line: 255 255 255;
+    --tex-ink: 255 255 255;
+    --tex-alpha: 0.022;
+    --tex-alpha-strong: 0.04;
+    color: rgb(var(--c-ink));
   }
 
   /* --- misc ------------------------------------------------------------- */
@@ -236,7 +694,7 @@ html.light {
     background: linear-gradient(
       115deg,
       transparent 35%,
-      rgba(255, 255, 255, 0.07) 48%,
+      var(--sheen-color) 48%,
       transparent 62%
     );
     transform: translateX(-120%);
@@ -262,8 +720,8 @@ html.light {
     background: conic-gradient(
       from var(--ring-angle, 0deg),
       transparent 0deg,
-      var(--ring-color, #1B72F5) 60deg,
-      #22D3EE 110deg,
+      var(--ring-color, #0059FD) 60deg,
+      #00C9FD 110deg,
       transparent 190deg,
       transparent 360deg
     );
@@ -293,7 +751,7 @@ html.light {
     left: 0;
     height: 1px;
     width: 35%;
-    background: linear-gradient(90deg, transparent, #22D3EE, transparent);
+    background: linear-gradient(90deg, transparent, #00C9FD, transparent);
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -325,6 +783,13 @@ html.light {
   filter: blur(90px);
   pointer-events: none;
   will-change: transform;
+}
+
+/* The hero's slide-tinted glows. Alpha lives here rather than in a hex suffix
+   on the inline style, so it can differ per theme — at the dark-mode strength
+   these blooms turn a near-white canvas into a coloured wash. */
+.hero-halo {
+  opacity: var(--hero-halo-alpha);
 }
 
 .grid-field {
@@ -381,19 +846,30 @@ html.light {
 input,
 textarea,
 select {
-  background-color: rgb(var(--c-line) / 0.04);
-  border: 1px solid rgb(var(--c-line) / 0.12);
+  /* `raised` rather than a line tint: on the light canvas a 4% slate wash left
+     the field indistinguishable from the card it sits on. */
+  background-color: rgb(var(--c-raised));
+  border: 1px solid rgb(var(--c-line) / 0.14);
   color: rgb(var(--c-ink));
+  box-shadow: inset 0 1px 2px rgb(var(--c-line) / 0.05);
   transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 input::placeholder,
 textarea::placeholder { color: rgb(var(--c-faint)); }
+input:hover:not(:focus),
+textarea:hover:not(:focus),
+select:hover:not(:focus) {
+  border-color: rgb(var(--c-line) / 0.26);
+}
 input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #1B72F5;
-  box-shadow: 0 0 0 4px rgba(27, 114, 245, 0.14);
+  border-color: #0059FD;
+  background-color: rgb(var(--c-panel));
+  box-shadow:
+    0 0 0 4px rgba(0, 89, 253, 0.14),
+    0 10px 24px -14px rgba(0, 89, 253, 0.5);
 }
 select option {
   background-color: rgb(var(--c-panel));
@@ -409,4 +885,8 @@ select option {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* The colour fill still flips (instantly, which is correct), but the purely
+     decorative slide-in is suppressed rather than teleporting into view. */
+  .fill-shape { display: none; }
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
 import Logo from './ui/Logo';
 import Reveal from './ui/Reveal';
+import Texture from './ui/Texture';
 import { Marquee } from './ui/Motion';
 import { navLinks, site, techMarquee } from '../data/site';
 import { servicesData } from '../data/servicesData';
@@ -11,22 +12,30 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-32 overflow-hidden border-t border-line/[0.08]">
+    <footer className="band-dark relative isolate mt-32 overflow-hidden">
+      {/* Texture stays in the corners and well under the content: at the
+          previous strength the contour fan cut straight across the logo and
+          link columns. No drift either — a moving pattern behind body copy is
+          hard to read against. */}
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-[30rem]">
+        <Texture
+          pattern="contour"
+          opacity={0.16}
+          fade="right"
+          className="text-brand-400"
+        />
+      </div>
+      <div aria-hidden className="pointer-events-none absolute bottom-0 right-0 h-2/3 w-[26rem]">
+        <Texture pattern="hex" opacity={0.1} fade="left" className="text-brand-300" />
+      </div>
       <div
         aria-hidden
-        className="halo"
-        style={{
-          width: '44rem',
-          height: '30rem',
-          bottom: '-18rem',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          background: 'var(--halo-1)',
-        }}
+        className="pointer-events-none absolute -bottom-40 left-1/2 h-[30rem] w-[44rem] -translate-x-1/2 rounded-full opacity-70 blur-3xl"
+        style={{ background: 'radial-gradient(circle, rgb(27 114 245 / 0.28), transparent 70%)' }}
       />
 
       {/* technology band */}
-      <div className="border-b border-line/[0.08] py-6">
+      <div className="relative border-b border-line/10 py-6">
         <Marquee speed={42}>
           {techMarquee.map((tech) => (
             <span
@@ -34,7 +43,7 @@ export default function Footer() {
               className="flex items-center gap-4 whitespace-nowrap font-mono text-[0.68rem] uppercase tracking-[0.22em] text-faint"
             >
               {tech}
-              <span className="h-1 w-1 rounded-full bg-cyanic-400/50" />
+              <span className="h-1 w-1 rounded-full bg-accent/50" />
             </span>
           ))}
         </Marquee>
@@ -44,7 +53,8 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           {/* brand */}
           <Reveal className="lg:col-span-4">
-            <Logo variant="full" className="h-8" />
+            {/* the footer band is dark in both themes */}
+            <Logo variant="full" className="h-8" onDark />
             <p className="mt-6 max-w-sm text-[0.88rem] leading-relaxed text-muted">
               {site.tagline}
             </p>
@@ -56,7 +66,7 @@ export default function Footer() {
             <div className="mt-7 space-y-2.5">
               <a
                 href={`mailto:${site.email}`}
-                className="flex items-center gap-2.5 text-[0.84rem] text-muted transition-colors hover:text-cyanic-400"
+                className="flex items-center gap-2.5 text-[0.84rem] text-muted transition-colors hover:text-accent"
               >
                 <Mail className="h-3.5 w-3.5" />
                 {site.email}
@@ -140,13 +150,13 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <Link
               to="/privacy"
-              className="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-faint transition-colors hover:text-cyanic-400"
+              className="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-faint transition-colors hover:text-accent"
             >
               Privacy Policy
             </Link>
             <Link
               to="/terms"
-              className="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-faint transition-colors hover:text-cyanic-400"
+              className="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-faint transition-colors hover:text-accent"
             >
               Terms & Conditions
             </Link>

@@ -24,9 +24,9 @@ export default function SectionHeader({
           transition={{ duration: 0.5 }}
           className={`mb-5 flex items-center gap-3 ${isCenter ? 'justify-center' : ''}`}
         >
-          <span className="h-px w-8 bg-gradient-to-r from-transparent to-cyanic-400" />
-          <span className="eyebrow text-cyanic-400">{eyebrow}</span>
-          <span className="h-px w-8 bg-gradient-to-l from-transparent to-cyanic-400" />
+          <span className="h-px w-8 bg-gradient-to-r from-transparent to-accent" />
+          <span className="eyebrow text-accent">{eyebrow}</span>
+          <span className="h-px w-8 bg-gradient-to-l from-transparent to-accent" />
         </motion.div>
       )}
 

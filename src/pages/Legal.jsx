@@ -117,7 +117,7 @@ export default function Legal({ kind = 'privacy' }) {
           {doc.sections.map((section, i) => (
             <Reveal key={section.h} delay={i * 0.04} className="surface rounded-3xl p-7 sm:p-8">
               <h2 className="flex items-baseline gap-3 text-lg font-bold text-ink">
-                <span className="font-mono text-[0.68rem] text-cyanic-400">
+                <span className="font-mono text-[0.68rem] text-accent">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {section.h}
