@@ -61,10 +61,14 @@ export default function ServiceDetail() {
               className={`h-full w-full object-cover ${service.grade} ${service.imagePosition ?? ''}`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-panel via-panel/20 to-transparent" />
-            <div
-              className="absolute inset-0 opacity-40 mix-blend-color"
-              style={{ background: service.accent }}
-            />
+            {/* Gated the same way the blocks on /services are: the branded
+                scene artwork carries `grade: ''` and must not be tinted. */}
+            {service.grade && (
+              <div
+                className="absolute inset-0 opacity-40 mix-blend-color"
+                style={{ background: service.accent }}
+              />
+            )}
             <span
               aria-hidden
               className="pointer-events-none absolute inset-x-0 top-0 h-28 animate-scan-line opacity-40"

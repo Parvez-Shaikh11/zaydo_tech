@@ -68,7 +68,13 @@ export const photos = {
 };
 
 /* --------------------------------------------------------------- renders */
-/** Abstract 3D renders. Unlike `photos`, these are opaque and are framed. */
+/**
+ * Abstract 3D renders. Unlike `photos`, these are opaque and are framed.
+ *
+ * CURRENTLY UNREFERENCED — the case studies moved to `artwork` below. Kept so
+ * a stock visual is one import away; the four files are ~3.9 MB in total, so
+ * delete both this block and `public/photos/*_3d.png` if they stay unused.
+ */
 export const renders = {
   hero: `${BASE}/hero_3d.png`,
   software: `${BASE}/software_3d.png`,
@@ -82,7 +88,8 @@ export const renders = {
  * never keyed. Being purpose-made it also needs no `grade` filter or accent
  * tint over it; the entry in `servicesData` sets `grade: ''` to say so.
  *
- * One per capability. `renders` is now only used by the case studies.
+ * One per capability — and, because each case study belongs to exactly one
+ * capability, the same five carry the project cards on Home and /work.
  */
 export const artwork = {
   customSoftware: `${BASE}/service-custom-software.png`,

@@ -1,29 +1,22 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ServiceCard from './ServiceCard';
 import Reveal from './ui/Reveal';
 import Texture from './ui/Texture';
+import useSteppedRail from './ui/useSteppedRail';
 import { servicesData } from '../data/servicesData';
 
 /**
  * The reference's services band: a dark textured panel sits behind the section
  * heading, and the card row overlaps out of its bottom edge.
  *
- * The rail steps one whole card at a time and always shows a WHOLE number of
- * cards — four on a wide screen. The previous version was a continuous marquee,
- * which meant a card was permanently sliced by each edge of the viewport and
- * the row never lined up with the container gutters.
- *
- * The loop is seamless because the list is rendered twice: advancing past the
- * last real card lands on its duplicate, and the index is then snapped back to
- * zero on a frame with transitions disabled, so nothing is visible.
+ * The stepping, looping and pause behaviour all live in `useSteppedRail`,
+ * which `ProjectRail` shares — see that file for how the seamless loop works.
  */
 
-const STEP_MS = 3400;
-const GLIDE_MS = 700;
-
-/* Widest first — the first match wins. */
+/* Widest first — the first match wins. Module scope: `useSteppedRail` keys its
+   resize effect on this array's identity. */
 const BREAKPOINTS = [
   { min: 1180, perView: 4 },
   { min: 900, perView: 3 },
@@ -31,83 +24,12 @@ const BREAKPOINTS = [
   { min: 0, perView: 1 },
 ];
 
-function perViewFor(width) {
-  return BREAKPOINTS.find((b) => width >= b.min).perView;
-}
-
 export default function ServiceCarousel({ services = servicesData }) {
-  const count = services.length;
-
-  const [perView, setPerView] = useState(() =>
-    perViewFor(typeof window === 'undefined' ? 1280 : window.innerWidth),
-  );
-  const [index, setIndex] = useState(0);
-  const [gliding, setGliding] = useState(true);
-  const [paused, setPaused] = useState(false);
-  const snapTimer = useRef(null);
-
-  useEffect(() => {
-    const onResize = () => setPerView(perViewFor(window.innerWidth));
-    onResize();
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+  const rail = useSteppedRail({ count: services.length, breakpoints: BREAKPOINTS });
 
   /* Rendered twice. `index` is allowed to reach `count`, which needs
      count + perView slides to stay filled — 2x covers every perView we use. */
   const loop = [...services, ...services];
-
-  const next = useCallback(() => setIndex((i) => i + 1), []);
-
-  const prev = useCallback(() => {
-    if (index > 0) {
-      setIndex(index - 1);
-      return;
-    }
-    /* Nothing to move back to at zero, so teleport onto the duplicate set with
-       transitions off — visually identical — and let the effect below play the
-       real step one frame later. */
-    setGliding(false);
-    setIndex(count);
-  }, [index, count]);
-
-  /* Re-enable the transition (and step back) one frame after a teleport.
-     Two rAFs: the first lands in the frame that commits `gliding: false`, the
-     second is the earliest frame where the un-transitioned position is live. */
-  useEffect(() => {
-    if (gliding) return undefined;
-    let inner = 0;
-    const outer = requestAnimationFrame(() => {
-      inner = requestAnimationFrame(() => {
-        setGliding(true);
-        setIndex((i) => (i === count ? count - 1 : i));
-      });
-    });
-    return () => {
-      cancelAnimationFrame(outer);
-      cancelAnimationFrame(inner);
-    };
-  }, [gliding, count]);
-
-  /* Once the step onto the duplicate has finished playing, snap the index home
-     with transitions off. Visually identical, so the jump is invisible.
-     Guarded on `gliding` so it never fires for the teleport `prev` performs. */
-  useEffect(() => {
-    if (index !== count || !gliding) return undefined;
-    snapTimer.current = setTimeout(() => {
-      setGliding(false);
-      setIndex(0);
-    }, GLIDE_MS + 40);
-    return () => clearTimeout(snapTimer.current);
-  }, [index, count, gliding]);
-
-  useEffect(() => {
-    if (paused || !gliding) return undefined;
-    const t = setTimeout(next, STEP_MS);
-    return () => clearTimeout(t);
-  }, [index, paused, gliding, next]);
-
-  const slideWidth = 100 / perView;
 
   return (
     <section className="relative isolate mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -172,8 +94,8 @@ export default function ServiceCarousel({ services = servicesData }) {
           <Reveal delay={0.1} className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               {[
-                { label: 'Previous services', onClick: prev, Icon: ArrowLeft },
-                { label: 'Next services', onClick: next, Icon: ArrowRight },
+                { label: 'Previous services', onClick: rail.prev, Icon: ArrowLeft },
+                { label: 'Next services', onClick: rail.next, Icon: ArrowRight },
               ].map(({ label, onClick, Icon }) => (
                 <button
                   key={label}
@@ -197,13 +119,7 @@ export default function ServiceCarousel({ services = servicesData }) {
       {/* The rail is pulled up until roughly half of each card sits on the dark
           panel — the shallow overlap the previous version had made the cards
           look like they had merely been dropped underneath it. */}
-      <div
-        className="relative -mt-[13.75rem]"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocusCapture={() => setPaused(true)}
-        onBlurCapture={() => setPaused(false)}
-      >
+      <div className="relative -mt-[13.75rem]" {...rail.pauseHandlers}>
         {/* px lines the outer cards up with the panel's own padding, once the
             slides' 12px gutter is taken off it. */}
         <div className="px-[1.125rem] sm:px-[1.75rem]">
@@ -213,15 +129,7 @@ export default function ServiceCarousel({ services = servicesData }) {
               pt leaves room for the icon plate hanging above the first card; pb
               clears the hovered card's lift plus its drop shadow. */}
           <div className="overflow-hidden pb-14 pt-[4.5rem]">
-            <div
-              className="flex w-full"
-              style={{
-                transform: `translateX(-${index * slideWidth}%)`,
-                transition: gliding
-                  ? `transform ${GLIDE_MS}ms cubic-bezier(0.22,1,0.36,1)`
-                  : 'none',
-              }}
-            >
+            <div className="flex w-full" style={rail.trackStyle}>
               {loop.map((service, i) => (
                 <div
                   /* Duplicated track — the index keeps the second copy's keys
@@ -230,7 +138,7 @@ export default function ServiceCarousel({ services = servicesData }) {
                      on screen, so they have to stay readable and clickable. */
                   key={`${service.id}-${i}`}
                   className="shrink-0 px-3"
-                  style={{ width: `${slideWidth}%` }}
+                  style={{ width: `${rail.slideWidth}%` }}
                 >
                   <ServiceCard
                     service={service}

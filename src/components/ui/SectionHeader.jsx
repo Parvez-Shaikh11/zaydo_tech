@@ -2,8 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { WordReveal } from './Reveal';
 
+/**
+ * `icon` swaps the two hairlines flanking the eyebrow for a single glyph plate
+ * ahead of it — the reference's label treatment. Pass a lucide component.
+ */
 export default function SectionHeader({
   eyebrow,
+  icon: Icon,
   title,
   description,
   align = 'center',
@@ -24,9 +29,15 @@ export default function SectionHeader({
           transition={{ duration: 0.5 }}
           className={`mb-5 flex items-center gap-3 ${isCenter ? 'justify-center' : ''}`}
         >
-          <span className="h-px w-8 bg-gradient-to-r from-transparent to-accent" />
+          {Icon ? (
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-500/12 ring-1 ring-brand-500/25">
+              <Icon className="h-3.5 w-3.5 text-accent" />
+            </span>
+          ) : (
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-accent" />
+          )}
           <span className="eyebrow text-accent">{eyebrow}</span>
-          <span className="h-px w-8 bg-gradient-to-l from-transparent to-accent" />
+          {!Icon && <span className="h-px w-8 bg-gradient-to-l from-transparent to-accent" />}
         </motion.div>
       )}
 

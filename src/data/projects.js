@@ -1,7 +1,12 @@
-import { renders } from './images';
+import { artwork } from './images';
 
 /**
  * Case studies.
+ *
+ * `title` says what the thing IS, in plain words. These used to be invented
+ * product brands — AeroOps, MedFlow, InsightDesk — which read as a client list
+ * we do not have and told a visitor nothing about the work. A name has to be
+ * understood at a glance from the card alone.
  *
  * `serviceId` links each project back to `servicesData`, which powers the Work
  * page filter and the "related work" block on every service page.
@@ -9,12 +14,16 @@ import { renders } from './images';
  * `status` is stated plainly on every card. Concept and internal builds are
  * labelled as such — we do not present them as client engagements, and no
  * metric appears here that was not actually observed.
+ *
+ * `grade` is deliberately empty on all five: the branded scene artwork is
+ * purpose-made and on-brand already, so it gets no filter and no accent tint.
+ * Set it back to a `brand-grade*` class only if a stock image is used again.
  */
 export const projects = [
   {
-    slug: 'aeroops',
-    title: 'AeroOps',
-    tagline: 'Enterprise Operations & Asset Management System',
+    slug: 'operations-management-system',
+    title: 'Operations Management System',
+    tagline: 'Scheduling, assets and maintenance in one place',
     serviceId: 'custom-software',
     category: 'Custom Software',
     status: 'Production System',
@@ -22,8 +31,8 @@ export const projects = [
     year: '2025',
     featured: true,
     role: 'Core Software Architecture & Backend Engineering',
-    image: renders.hero,
-    grade: 'brand-grade',
+    image: artwork.customSoftware,
+    grade: '',
     accent: '#0059FD',
     description:
       'A resilient operations suite that schedules resources, monitors asset telemetry in real time, and runs predictive maintenance logging from a single database.',
@@ -53,9 +62,9 @@ export const projects = [
       'The system became the operational source of truth. Scheduling conflicts are now caught at the point of entry, and compliance documentation that was previously assembled by hand is generated from the same records the team already maintains.',
   },
   {
-    slug: 'optimaretail',
-    title: 'OptimaRetail',
-    tagline: 'High-Performance Headless Commerce Platform',
+    slug: 'ecommerce-platform',
+    title: 'E-Commerce Platform',
+    tagline: 'Headless storefront with live inventory',
     serviceId: 'web-applications',
     category: 'Web Applications',
     status: 'Production System',
@@ -63,8 +72,8 @@ export const projects = [
     year: '2025',
     featured: true,
     role: 'Frontend Engineering & Third-Party Integration',
-    image: renders.software,
-    grade: 'brand-grade',
+    image: artwork.webApplications,
+    grade: '',
     accent: '#0077FD',
     description:
       'A decoupled commerce interface with global inventory sync, edge-cached catalogue queries and a merchant dashboard built for daily operational use.',
@@ -94,9 +103,9 @@ export const projects = [
       'Page loads are effectively immediate, the storefront can be changed without touching the backend, and stock levels shown to customers now reflect warehouse state within seconds rather than the following morning.',
   },
   {
-    slug: 'medflow',
-    title: 'MedFlow',
-    tagline: 'Intelligent Intake & Process Automation Engine',
+    slug: 'document-automation',
+    title: 'Document Automation',
+    tagline: 'Intake and validation without re-keying',
     serviceId: 'automation',
     category: 'Automation',
     status: 'Operational Concept / Internal Project',
@@ -104,8 +113,8 @@ export const projects = [
     year: '2025',
     featured: false,
     role: 'Automation Architecture & API Integration',
-    image: renders.automation,
-    grade: 'brand-grade-warm',
+    image: artwork.automation,
+    grade: '',
     accent: '#0086FD',
     description:
       'An automation pipeline that ingests inbound documentation, validates field data against reference rules, and syncs structured records into a legacy management system.',
@@ -135,9 +144,9 @@ export const projects = [
       'Standard registrations no longer require manual data entry. Because validation runs before the write rather than after, the error class that previously surfaced downstream is caught at ingestion.',
   },
   {
-    slug: 'insightdesk',
-    title: 'InsightDesk',
-    tagline: 'Grounded Internal Knowledge Retrieval',
+    slug: 'ai-knowledge-search',
+    title: 'AI Knowledge Search',
+    tagline: 'Every answer cites the source it came from',
     serviceId: 'ai-systems',
     category: 'AI Systems',
     status: 'Internal R&D Project',
@@ -145,8 +154,8 @@ export const projects = [
     year: '2026',
     featured: false,
     role: 'Retrieval Architecture & Evaluation',
-    image: renders.ai,
-    grade: 'brand-grade-green',
+    image: artwork.aiSystems,
+    grade: '',
     accent: '#00C9FD',
     description:
       'An internal retrieval system that answers questions from a company document set and cites the exact source passage behind every answer.',
@@ -176,9 +185,9 @@ export const projects = [
       'An internal build we evaluate against a fixed question set on our own documents. Its purpose is to make the retrieval pattern verifiable — we can show where an answer came from — before proposing it to a client.',
   },
   {
-    slug: 'northpoint',
-    title: 'NorthPoint',
-    tagline: 'Corporate Digital Presence & Project Intake',
+    slug: 'website-design',
+    title: 'Website Design & Build',
+    tagline: 'A corporate site that qualifies the enquiry',
     serviceId: 'digital-platforms',
     category: 'Digital Platforms',
     status: 'Concept Project',
@@ -186,9 +195,8 @@ export const projects = [
     year: '2026',
     featured: false,
     role: 'Content Architecture, Design & Frontend Engineering',
-    image: renders.software,
-    grade: 'brand-grade',
-    imagePosition: 'object-right',
+    image: artwork.digitalPlatforms,
+    grade: '',
     accent: '#5CA5FF',
     description:
       'A concept build exploring how a professional services firm should present itself online and how enquiries should be structured before they reach a human.',

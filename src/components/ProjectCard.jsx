@@ -45,10 +45,15 @@ export default function ProjectCard({ project, index = 0 }) {
             className={`h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110 ${project.grade} ${project.imagePosition ?? ''}`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-panel via-panel/45 to-transparent" />
-          <div
-            className="absolute inset-0 opacity-40 mix-blend-color"
-            style={{ background: project.accent }}
-          />
+          {/* Only stock imagery is tinted — see the note on `grade` in
+              `src/data/projects.js`. Blending an accent over purpose-made
+              artwork just muddies colours somebody already chose. */}
+          {project.grade && (
+            <div
+              className="absolute inset-0 opacity-40 mix-blend-color"
+              style={{ background: project.accent }}
+            />
+          )}
           <div className="absolute inset-x-5 top-5 flex items-start justify-between gap-3">
             <StatusBadge project={project} />
             <span className="rounded-full border border-line/10 bg-panel/80 px-2.5 py-1 font-mono text-[0.55rem] tracking-[0.18em] text-muted backdrop-blur-md">
@@ -97,10 +102,12 @@ export function FeaturedProjectCard({ project }) {
             className={`h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-110 ${project.grade} ${project.imagePosition ?? ''}`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-panel via-transparent to-transparent lg:bg-gradient-to-r" />
-          <div
-            className="absolute inset-0 opacity-35 mix-blend-color"
-            style={{ background: project.accent }}
-          />
+          {project.grade && (
+            <div
+              className="absolute inset-0 opacity-35 mix-blend-color"
+              style={{ background: project.accent }}
+            />
+          )}
           <span className="absolute left-6 top-6 rounded-full border border-line/10 bg-panel/85 px-3 py-1.5 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-ink backdrop-blur-md">
             Featured case study
           </span>

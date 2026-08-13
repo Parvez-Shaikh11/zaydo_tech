@@ -73,10 +73,14 @@ export default function WorkDetail() {
               className={`h-full w-full object-cover ${project.grade} ${project.imagePosition ?? ''}`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-panel via-panel/15 to-transparent" />
-            <div
-              className="absolute inset-0 opacity-35 mix-blend-color"
-              style={{ background: project.accent }}
-            />
+            {/* Only stock imagery is tinted — see the note on `grade` in
+                `src/data/projects.js`. */}
+            {project.grade && (
+              <div
+                className="absolute inset-0 opacity-35 mix-blend-color"
+                style={{ background: project.accent }}
+              />
+            )}
             <span
               aria-hidden
               className="pointer-events-none absolute inset-x-0 top-0 h-28 animate-scan-line opacity-40"
