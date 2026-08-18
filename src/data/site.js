@@ -1,12 +1,30 @@
 export const site = {
   name: 'Zaydo Tech',
   tagline: 'Software. Automation. Digital Systems.',
-  email: 'hello@zaydotech.com',
+  email: 'zaydotech.official@gmail.com',
   location: 'Working with businesses globally · Remote-first delivery',
+  /**
+   * Real accounts only. Every href is the live profile URL — nothing points at
+   * a network's homepage as a placeholder, because a link that goes nowhere
+   * costs more trust than a missing icon. Add a network here once the account
+   * exists; the footer and the contact page pick it up automatically.
+   */
   socials: [
-    { name: 'LinkedIn', href: 'https://www.linkedin.com/', handle: '/zaydotech' },
-    { name: 'X', href: 'https://x.com/', handle: '@zaydotech' },
-    { name: 'Instagram', href: 'https://instagram.com/', handle: '@zaydotech' },
+    {
+      name: 'Instagram',
+      href: 'https://www.instagram.com/zaydotech',
+      handle: '@zaydotech',
+    },
+    {
+      name: 'YouTube',
+      href: 'https://www.youtube.com/channel/UCwouefMhxdHF0PvNm67-dzw',
+      handle: 'Zaydo Tech',
+    },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/zaydotech',
+      handle: '/zaydotech',
+    },
   ],
 };
 
