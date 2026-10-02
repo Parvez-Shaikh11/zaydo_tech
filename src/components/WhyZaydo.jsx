@@ -12,13 +12,12 @@ import { photos } from '../data/images';
  * fade-up reads as the block appearing all at once.
  */
 const principleRow = {
-  hidden: { opacity: 0, x: 46, scale: 0.97, filter: 'blur(6px)' },
+  hidden: { opacity: 0, x: 20, scale: 0.98 },
   show: {
     opacity: 1,
     x: 0,
     scale: 1,
-    filter: 'blur(0px)',
-    transition: { duration: 0.62, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
   },
 };
 

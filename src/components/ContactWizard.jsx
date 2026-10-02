@@ -47,9 +47,9 @@ const EMPTY = {
 /* Blur and a touch of scale on top of the slide, so a step arrives rather than
    simply appearing at its final position. */
 const slide = {
-  enter: (dir) => ({ opacity: 0, x: dir > 0 ? 54 : -54, scale: 0.985, filter: 'blur(6px)' }),
-  center: { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' },
-  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -54 : 54, scale: 0.985, filter: 'blur(6px)' }),
+  enter: (dir) => ({ opacity: 0, x: dir > 0 ? 30 : -30, scale: 0.99 }),
+  center: { opacity: 1, x: 0, scale: 1 },
+  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -30 : 30, scale: 0.99 }),
 };
 
 /* Fields cascade in behind their step rather than landing as one slab. */

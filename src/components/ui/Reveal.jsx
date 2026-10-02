@@ -2,24 +2,23 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const OFFSETS = {
-  up: { y: 34, x: 0 },
-  down: { y: -34, x: 0 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
+  up: { y: 16, x: 0 },
+  down: { y: -16, x: 0 },
+  left: { x: 20, y: 0 },
+  right: { x: -20, y: 0 },
   none: { x: 0, y: 0 },
 };
 
 /**
- * Scroll-triggered entrance. Fires once, respects a shared easing curve so the
- * whole site animates with one personality instead of ten different ones.
+ * Scroll-triggered entrance. Fires once, uses lightweight transform & opacity
+ * without heavy blur repaints for 60-120fps buttery smooth performance.
  */
 export default function Reveal({
   children,
   as = 'div',
   direction = 'up',
   delay = 0,
-  duration = 0.7,
-  blur = true,
+  duration = 0.35,
   className = '',
   ...rest
 }) {
@@ -29,9 +28,9 @@ export default function Reveal({
   return (
     <MotionTag
       className={className}
-      initial={{ opacity: 0, ...offset, filter: blur ? 'blur(8px)' : 'blur(0px)' }}
-      whileInView={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-90px' }}
+      initial={{ opacity: 0, ...offset }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-30px' }}
       transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       {...rest}
     >
@@ -41,13 +40,13 @@ export default function Reveal({
 }
 
 /** Parent that cascades its children in, used for card grids and lists. */
-export function Stagger({ children, className = '', gap = 0.09, delay = 0, ...rest }) {
+export function Stagger({ children, className = '', gap = 0.06, delay = 0, ...rest }) {
   return (
     <motion.div
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, margin: '-30px' }}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: gap, delayChildren: delay } },
@@ -60,12 +59,11 @@ export function Stagger({ children, className = '', gap = 0.09, delay = 0, ...re
 }
 
 export const staggerItem = {
-  hidden: { opacity: 0, y: 28, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 14 },
   show: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -85,10 +83,10 @@ export function WordReveal({ text, className = '', delay = 0, highlight = [] }) 
         <motion.span
           key={`${word}-${i}`}
           className={`inline-block ${accented.includes(i) ? 'text-brand-gradient' : ''}`}
-          initial={{ opacity: 0, y: '0.5em', filter: 'blur(10px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: '0.3em' }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: delay + i * 0.055, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.35, delay: delay + i * 0.035, ease: [0.22, 1, 0.36, 1] }}
         >
           {word}
           {i < words.length - 1 && ' '}
