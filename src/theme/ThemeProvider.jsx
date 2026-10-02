@@ -1,17 +1,17 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'zaydo-theme';
-const ThemeContext = createContext({ theme: 'light', toggleTheme: () => {} });
+const ThemeContext = createContext({ theme: 'dark', toggleTheme: () => {} });
 
 function readInitialTheme() {
-  if (typeof window === 'undefined') return 'light';
+  if (typeof window === 'undefined') return 'dark';
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === 'light' || stored === 'dark') return stored;
   } catch {
     /* storage blocked — fall through to the brand default */
   }
-  return 'light';
+  return 'dark';
 }
 
 export function ThemeProvider({ children }) {
