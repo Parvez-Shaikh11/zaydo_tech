@@ -9,35 +9,13 @@ export function AmbientBackdrop() {
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <div className="absolute inset-0 grid-field opacity-70" />
       <div
-        className="halo animate-drift"
+        className="absolute inset-0 pointer-events-none opacity-60"
         style={{
-          width: '46rem',
-          height: '46rem',
-          top: '-16rem',
-          left: '-10rem',
-          background: 'var(--halo-1)',
-        }}
-      />
-      <div
-        className="halo animate-drift"
-        style={{
-          width: '38rem',
-          height: '38rem',
-          top: '22%',
-          right: '-14rem',
-          background: 'var(--halo-2)',
-          animationDelay: '-7s',
-        }}
-      />
-      <div
-        className="halo animate-drift"
-        style={{
-          width: '42rem',
-          height: '42rem',
-          bottom: '-18rem',
-          left: '30%',
-          background: 'var(--halo-3)',
-          animationDelay: '-14s',
+          backgroundImage: `
+            radial-gradient(46rem 46rem at -5% -5%, var(--halo-1), transparent 75%),
+            radial-gradient(38rem 38rem at 105% 30%, var(--halo-2), transparent 75%),
+            radial-gradient(42rem 42rem at 45% 105%, var(--halo-3), transparent 75%)
+          `,
         }}
       />
     </div>

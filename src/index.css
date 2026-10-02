@@ -164,15 +164,9 @@ html.dark {
 @layer components {
   /* --- surfaces --------------------------------------------------------- */
   .surface {
-    background-image: linear-gradient(
-      160deg,
-      rgb(var(--c-panel) / 0.86) 0%,
-      rgb(var(--c-raised) / 0.72) 100%
-    );
+    background-color: rgb(var(--c-panel));
     border: 1px solid rgb(var(--c-line) / var(--line-alpha));
     box-shadow: var(--shadow-card);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
   }
 
   .surface-hover {
