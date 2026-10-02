@@ -22,7 +22,7 @@ const slides = [
     eyebrow: 'Software • Automation • Digital Systems',
     label: 'Positioning',
     title: ['We turn business complexity into', 'engineered digital systems.'],
-    body: 'Zaydo Tech designs and builds custom software, scalable web applications and intelligent automation that help businesses operate smarter, remove operational bottlenecks and scale without adding headcount.',
+    body: 'From modern websites to custom software and automation, we build digital solutions around the way your business works.',
     accent: '#0059FD',
     secondary: { label: 'Explore our work', to: '/work' },
     chips: ['Architecture', 'Engineering', 'Delivery'],

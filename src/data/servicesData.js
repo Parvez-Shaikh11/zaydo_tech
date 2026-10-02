@@ -269,7 +269,7 @@ export const servicesData = [
     id: 'digital-platforms',
     number: '05',
     title: 'Websites & Digital Platforms',
-    short: 'Digital Platforms',
+    short: 'Websites & Digital Experiences',
     icon: Globe2,
     accent: '#0047CC',
     fillFrom: '#0059FD',
@@ -282,6 +282,8 @@ export const servicesData = [
     imageShape: 'rounded-[2.5rem]',
     grade: '',
     tagline: 'The digital front door serious clients judge you by.',
+    supportingLine:
+      'From redesigning outdated websites to building modern digital platforms, we create fast, responsive experiences designed around your business.',
     description:
       'For most businesses the website is the first and sometimes only impression a prospective client forms. We engineer sites that load instantly, read credibly, and are structured so that the enquiry a visitor sends actually contains enough information to act on.',
     problemsSolved: [

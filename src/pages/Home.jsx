@@ -1,11 +1,14 @@
 import React from 'react';
 import HeroSlider from '../components/HeroSlider';
+import HelpBuildSection from '../components/HelpBuildSection';
 import ServiceCarousel from '../components/ServiceCarousel';
+import ProblemSection from '../components/ProblemSection';
 import WhyZaydo from '../components/WhyZaydo';
 import TechStackSection from '../components/TechStackSection';
 import Testimonials from '../components/Testimonials';
 import TeamGrid from '../components/TeamGrid';
 import ProjectRail from '../components/ProjectRail';
+import PossibleShowcase from '../components/PossibleShowcase';
 import Texture from '../components/ui/Texture';
 import CTASection from '../components/CTASection';
 import { projects } from '../data/projects';
@@ -20,12 +23,18 @@ export default function Home() {
     <div className="relative">
       <HeroSlider />
 
+      {/* ------------------------------------------- what can we help you build */}
+      <HelpBuildSection />
+
       {/* ------------------------------------------------ what we build */}
       {/* The capabilities panel is inset and rounded rather than a full-bleed
           band, so it needs its own breathing room above. */}
       <div id="capabilities" className="pt-4 sm:pt-8">
         <ServiceCarousel />
       </div>
+
+      {/* ----------------------------------- problem / outdated tech section */}
+      <ProblemSection />
 
       {/* ------------------------ why zaydo — tinted band, wave pattern */}
       <div className="band-tint relative isolate border-y border-line/[0.06] py-16 sm:py-20">
@@ -40,6 +49,9 @@ export default function Home() {
 
         {/* ----------------------------------------------- selected work */}
         <ProjectRail projects={railProjects} />
+
+        {/* ----------------------------------------------- see what's possible */}
+        <PossibleShowcase />
 
         {/* --------------------------------------------- technology stack */}
         <TechStackSection />

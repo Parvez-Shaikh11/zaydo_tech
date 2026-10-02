@@ -32,7 +32,7 @@ export default function Contact() {
         eyebrow="Start a project"
         title="Tell us what"
         highlight="you're building."
-        description="Have an idea, a business challenge, or a process that could work better with the right system behind it? Describe it in your own words — the form below is structured so that your answers give us enough to respond usefully."
+        description="Have an outdated website, a manual process, or a business problem you'd like to solve? Tell us what's not working and we'll help you figure out the next step."
         breadcrumb={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
         photo={photos.contactCall}
       />

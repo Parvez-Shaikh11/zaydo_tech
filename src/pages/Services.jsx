@@ -244,6 +244,11 @@ function ServiceBlock({ service, reversed }) {
             <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-faint">
               {service.number} — {service.short}
             </span>
+            {service.id === 'digital-platforms' && (
+              <span className="rounded-full border border-brand-500/40 bg-brand-500/10 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.16em] text-accent font-bold">
+                Core Service Focus
+              </span>
+            )}
           </div>
 
           <h2 className="mt-6 font-display text-2xl font-extrabold leading-tight text-ink sm:text-[2.1rem]">
@@ -252,6 +257,13 @@ function ServiceBlock({ service, reversed }) {
           <p className="mt-2 text-[0.85rem] font-medium uppercase tracking-[0.1em] text-accent">
             {service.tagline}
           </p>
+
+          {service.supportingLine && (
+            <p className="mt-3 rounded-xl border border-brand-500/20 bg-brand-500/[0.04] p-3.5 text-[0.88rem] font-medium leading-relaxed text-ink">
+              {service.supportingLine}
+            </p>
+          )}
+
           <p className="mt-5 max-w-2xl text-[0.92rem] leading-relaxed text-muted">
             {service.description}
           </p>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MessageSquare, RefreshCw, ShieldCheck, Zap } from 'lucide-react';
+import { LayoutGrid, MessageSquare, RefreshCw, ShieldCheck, Zap } from 'lucide-react';
 import SectionHeader from './ui/SectionHeader';
 import PhotoStage from './ui/PhotoStage';
 import { Stagger } from './ui/Reveal';
@@ -54,6 +54,14 @@ const principles = [
     accent: '#0086FD',
     body: 'Delivery is not the end of the relationship. Software that is genuinely used needs maintenance, and we plan for that from the first architecture conversation.',
     proof: 'Handover includes a runbook',
+  },
+  {
+    n: '05',
+    title: 'Built Around Your Business',
+    icon: LayoutGrid,
+    accent: '#0059FD',
+    body: "We don't force your business into a predefined solution. We understand how you work and build around your requirements.",
+    proof: 'Engineered around your actual workflow',
   },
 ];
 

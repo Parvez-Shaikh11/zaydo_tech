@@ -61,6 +61,14 @@ export default function WorkDetail() {
       </PageHero>
 
       <div className="mx-auto max-w-7xl section-rhythm px-4 sm:px-6 lg:px-8">
+        {project.slug === 'website-design' && (
+          <Reveal className="rounded-2xl border border-brand-500/25 bg-brand-500/10 p-4 text-center sm:p-5">
+            <p className="text-[0.92rem] font-semibold text-ink sm:text-base">
+              We can transform an outdated website into a modern, responsive and professional digital experience.
+            </p>
+          </Reveal>
+        )}
+
         {/* ------------------------------------------------- project visual */}
         <Reveal className="relative overflow-hidden rounded-[2rem] border border-line/10 bg-panel/50 p-2 shadow-lift">
           <div className="relative isolate aspect-[16/9] overflow-hidden rounded-[1.6rem] sm:aspect-[21/9]">

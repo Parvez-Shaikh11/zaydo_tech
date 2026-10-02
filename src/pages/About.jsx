@@ -215,6 +215,47 @@ export default function About() {
           </Stagger>
         </section>
 
+        {/* ------------------------------------------- founder section */}
+        <section>
+          <SectionHeader
+            eyebrow="Leadership"
+            title="Meet the Person Behind Zaydo Tech"
+            highlight={[4, 5]}
+            description="Direct engineering leadership and personal accountability for every digital system we architect."
+            className="mb-10"
+          />
+
+          <Reveal className="surface mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 sm:p-10">
+            <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-brand-500/30 bg-brand-500/10 text-2xl font-black text-brand-400">
+                ZT
+              </div>
+              <div>
+                <h3 className="font-display text-xl font-bold text-ink sm:text-2xl">
+                  Founder & Principal Systems Architect
+                </h3>
+                <p className="mt-1 text-[0.8rem] font-medium text-accent">
+                  Zaydo Tech
+                </p>
+                <p className="mt-4 text-[0.9rem] leading-relaxed text-muted">
+                  Zaydo Tech is driven by a practical engineering philosophy: technology should solve real business problems, simplify operational complexity, and help businesses scale cleanly. Every system we build is designed with long-term reliability and clarity in mind.
+                </p>
+                <div className="mt-6">
+                  <a
+                    href="https://www.linkedin.com/company/zaydotech"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent transition-colors hover:text-ink"
+                  >
+                    Connect on LinkedIn
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
         {/* Renders null until src/data/team.js holds real people. */}
         <TeamGrid className="px-0" />
 
