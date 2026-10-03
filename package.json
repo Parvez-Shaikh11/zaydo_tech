@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "prep:logo": "node scripts/prep-logo.mjs",
     "prep:photos": "node scripts/prep-photos.mjs",
+    "prep:sitemap": "node scripts/generate-sitemap.mjs",
+    "build": "npm run prep:sitemap && vite build",
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
