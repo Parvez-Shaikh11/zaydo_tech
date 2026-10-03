@@ -18,10 +18,10 @@ const BASE = '/photos';
 
 /* ------------------------------------------------------------------ brand */
 export const brand = {
-  logoLight: `${BASE}/logo-light.png`,
-  logoDark: `${BASE}/logo-dark.png`,
-  markLight: `${BASE}/mark-light.png`,
-  markDark: `${BASE}/mark-dark.png`,
+  logoLight: `${BASE}/logo-light.webp`,
+  logoDark: `${BASE}/logo-dark.webp`,
+  markLight: `${BASE}/mark-light.webp`,
+  markDark: `${BASE}/mark-dark.webp`,
 };
 
 /* ------------------------------------------------------------ photography */
@@ -36,31 +36,31 @@ export const brand = {
  */
 export const photos = {
   heroDesk: {
-    src: `${BASE}/team-hero.png`,
+    src: `${BASE}/team-hero.webp`,
     width: 1160,
     height: 691,
     alt: 'Zaydo Tech engineer working at a laptop in the studio',
   },
   planning: {
-    src: `${BASE}/team-planning.png`,
+    src: `${BASE}/team-planning.webp`,
     width: 940,
     height: 729,
     alt: 'The Zaydo Tech team reviewing a system design together',
   },
   client: {
-    src: `${BASE}/team-client.png`,
+    src: `${BASE}/team-client.webp`,
     width: 940,
     height: 736,
     alt: 'A Zaydo Tech engineer walking a client through their build',
   },
   servicesHero: {
-    src: `${BASE}/services-hero.png`,
+    src: `${BASE}/services-hero.webp`,
     width: 980,
     height: 896,
     alt: 'A Zaydo Tech dashboard on laptop and phone, beside the plan-design-develop-deploy-grow delivery track',
   },
   contactCall: {
-    src: `${BASE}/contact-call.png`,
+    src: `${BASE}/contact-call.webp`,
     width: 1040,
     height: 697,
     alt: 'A Zaydo Tech engineer taking a call at their desk',
@@ -76,10 +76,10 @@ export const photos = {
  * delete both this block and `public/photos/*_3d.png` if they stay unused.
  */
 export const renders = {
-  hero: `${BASE}/hero_3d.png`,
-  software: `${BASE}/software_3d.png`,
-  automation: `${BASE}/automation_3d.png`,
-  ai: `${BASE}/ai_3d.png`,
+  hero: `${BASE}/hero_3d.webp`,
+  software: `${BASE}/software_3d.webp`,
+  automation: `${BASE}/automation_3d.webp`,
+  ai: `${BASE}/ai_3d.webp`,
 };
 
 /**
@@ -92,9 +92,9 @@ export const renders = {
  * capability, the same five carry the project cards on Home and /work.
  */
 export const artwork = {
-  customSoftware: `${BASE}/service-custom-software.png`,
-  webApplications: `${BASE}/service-web-applications.png`,
-  automation: `${BASE}/service-automation.png`,
-  aiSystems: `${BASE}/service-ai-systems.png`,
-  digitalPlatforms: `${BASE}/service-digital-platforms.png`,
+  customSoftware: `${BASE}/service-custom-software.webp`,
+  webApplications: `${BASE}/service-web-applications.webp`,
+  automation: `${BASE}/service-automation.webp`,
+  aiSystems: `${BASE}/service-ai-systems.webp`,
+  digitalPlatforms: `${BASE}/service-digital-platforms.webp`,
 };

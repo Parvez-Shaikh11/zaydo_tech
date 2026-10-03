@@ -76,7 +76,7 @@ html.dark {
   --c-line: 255 255 255;
   --c-ink: 241 245 249;
   --c-muted: 148 163 184;
-  --c-faint: 100 116 139;
+  --c-faint: 140 156 178;
 
   --line-alpha: 0.09;
   --glass-bg: rgba(10, 15, 28, 0.62);
@@ -642,7 +642,7 @@ html.dark {
   html.dark .band-dark .tile {
     --c-ink: 241 245 249;
     --c-muted: 148 163 184;
-    --c-faint: 100 116 139;
+    --c-faint: 140 156 178;
     --c-line: 255 255 255;
     --tex-ink: 255 255 255;
     --tex-alpha: 0.022;
