@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, MessageSquare, ShieldCheck } from 'lucide-react';
+import { Mail, MapPin, MessageSquare, Phone, ShieldCheck } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import ContactWizard from '../components/ContactWizard';
 import Reveal from '../components/ui/Reveal';
@@ -99,6 +99,13 @@ export default function Contact() {
                   <Mail className="h-4 w-4 shrink-0" />
                   {site.email}
                 </a>
+                <a
+                  href={`tel:${site.phoneRaw}`}
+                  className="flex items-center gap-3 text-[0.86rem] text-muted transition-colors hover:text-accent"
+                >
+                  <Phone className="h-4 w-4 shrink-0" />
+                  {site.phone}
+                </a>
                 <p className="flex items-start gap-3 text-[0.86rem] leading-relaxed text-faint">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                   {site.location}
@@ -106,8 +113,11 @@ export default function Contact() {
               </div>
 
               <p className="mt-7 rounded-2xl border border-line/[0.08] bg-line/[0.02] p-4 text-[0.78rem] leading-relaxed text-faint">
-                Prefer to skip the form? Email us directly with a paragraph about the problem —
-                that works just as well.
+                Prefer to skip the form? Call or WhatsApp us at{' '}
+                <a href={`tel:${site.phoneRaw}`} className="font-semibold text-accent hover:underline">
+                  {site.phone}
+                </a>{' '}
+                or email us directly — that works just as well.
               </p>
             </Reveal>
           </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, ChevronDown, Menu, Moon, Sun, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, Moon, Phone, Sun, X } from 'lucide-react';
 import Logo from './ui/Logo';
 import { Magnetic } from './ui/Motion';
-import { navLinks } from '../data/site';
+import { navLinks, site } from '../data/site';
 import { servicesData } from '../data/servicesData';
 import { useTheme } from '../theme/ThemeProvider';
 
@@ -289,7 +289,7 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <div className="border-t border-line/10 p-5">
+              <div className="space-y-2.5 border-t border-line/10 p-5">
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
@@ -298,6 +298,13 @@ export default function Navbar() {
                   Start Your Project
                   <ArrowRight className="h-4 w-4" />
                 </Link>
+                <a
+                  href={`tel:${site.phoneRaw}`}
+                  className="btn btn-ghost w-full justify-center text-[0.82rem]"
+                >
+                  <Phone className="h-4 w-4" />
+                  Call: {site.phone}
+                </a>
               </div>
             </motion.div>
           </motion.div>

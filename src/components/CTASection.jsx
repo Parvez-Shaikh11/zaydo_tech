@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Mail, Phone } from 'lucide-react';
 import { Magnetic } from './ui/Motion';
 import Texture from './ui/Texture';
 import PhotoStage from './ui/PhotoStage';
@@ -51,14 +51,18 @@ export default function CTASection({
 
             <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted">{body}</p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center flex-wrap">
               <Magnetic>
                 <Link to={primary.to} className="btn btn-primary !px-8 !py-4">
                   {primary.label}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Magnetic>
-              <a href={`mailto:${site.email}`} className="btn btn-ghost !px-8 !py-4">
+              <a href={`tel:${site.phoneRaw}`} className="btn btn-ghost !px-6 !py-4">
+                <Phone className="h-4 w-4" />
+                {site.phone}
+              </a>
+              <a href={`mailto:${site.email}`} className="btn btn-ghost !px-6 !py-4">
                 <Mail className="h-4 w-4" />
                 {site.email}
               </a>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import Logo from './ui/Logo';
 import Reveal from './ui/Reveal';
 import Texture from './ui/Texture';
@@ -70,6 +70,13 @@ export default function Footer() {
               >
                 <Mail className="h-3.5 w-3.5" />
                 {site.email}
+              </a>
+              <a
+                href={`tel:${site.phoneRaw}`}
+                className="flex items-center gap-2.5 text-[0.84rem] text-muted transition-colors hover:text-accent"
+              >
+                <Phone className="h-3.5 w-3.5" />
+                {site.phone}
               </a>
               <p className="flex items-center gap-2.5 text-[0.84rem] text-faint">
                 <MapPin className="h-3.5 w-3.5" />

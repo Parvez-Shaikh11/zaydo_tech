@@ -2,6 +2,8 @@ export const site = {
   name: 'Zaydo Tech',
   tagline: 'Software. Automation. Digital Systems.',
   email: 'zaydotech.official@gmail.com',
+  phone: '+91 91726 32945',
+  phoneRaw: '+919172632945',
   location: 'Working with businesses globally · Remote-first delivery',
   /**
    * Real accounts only. Every href is the live profile URL — nothing points at
