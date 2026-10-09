@@ -225,6 +225,92 @@ export const projects = [
     outcome:
       'A concept study, presented as such. It documents how we structure a corporate site and a staged intake flow, and it is the pattern behind the enquiry experience on this site.',
   },
+  {
+    slug: 'mindcrafters-academy',
+    title: 'MindCrafters Academy Platform',
+    tagline: 'Personalised 1:1 Tutoring & Board Exam Portal',
+    serviceId: 'digital-platforms',
+    category: 'Digital Platforms',
+    status: 'Production System',
+    statusTone: 'live',
+    liveUrl: 'https://mindcrafters.zaydotech.com/',
+    year: '2025',
+    featured: true,
+    role: 'Full-Stack Digital Platform Architecture & Content Engine',
+    image: artwork.mindcrafters,
+    grade: '',
+    accent: '#0059FD',
+    description:
+      'A high-converting live tutoring platform for MindCrafters Academy in Thane & online. Features board-specific syllabus mapping (CBSE, ICSE, IB, IGCSE), 1:1 live diagnostic booking, fee estimator, and direct WhatsApp lead conversion.',
+    challenge:
+      'Parents searching for personalized board exam tutoring struggled to evaluate subject coverage across different boards (CBSE, ICSE, IB, IGCSE, SSC), find transparent fee structures, or easily book diagnostic demo classes without long phone tag.',
+    approach:
+      'We designed and engineered a conversion-oriented digital platform. We mapped out board-specific course modules, created a live interactive fee estimator, built verified Saturday mock-test tracking showcases, and routed parent enquiries directly into WhatsApp for instantaneous demo scheduling.',
+    architecture: {
+      frontend: 'React Digital Platform, Tailwind CSS, Smooth Micro-Animations',
+      backend: 'Serverless Lead Ingestion & WhatsApp Webhook API',
+      database: 'Curriculum Schema & Dynamic Board Syllabus Mapping',
+      cloud: 'Edge Global CDN with Sub-Second Asset Delivery',
+      automation: 'Instant Parent Inquiry Routing & Weekly Report Triggers',
+    },
+    features: [
+      '1:1 Live diagnostic demo booking with hand-picked tutor matching',
+      'Comprehensive syllabus mapping for CBSE, ICSE, IB, IGCSE & SSC',
+      'Interactive monthly tuition fee estimator and transparent tier options',
+      'Verified Saturday mock-test score progress showcase & parent reviews',
+      'Direct 1-click WhatsApp integration for instant parent-coordinator chat',
+    ],
+    signals: [
+      'Live client production platform operating in Thane & Online',
+      'Zero-friction parent onboarding with instant demo scheduling',
+      'Sub-second page loading speed across desktop and mobile viewports',
+    ],
+    outcome:
+      'Streamlined parent inquiries and significantly raised demo booking conversion rates by giving parents immediate clarity on board coverage, transparent fees, and direct tutor matching.',
+  },
+  {
+    slug: 'clonmel-childrens-dental-clinic',
+    title: 'Clonmel Children\'s Dental Clinic',
+    tagline: 'Child-Focused Specialist Dental Practice Portal',
+    serviceId: 'web-applications',
+    category: 'Web Applications',
+    status: 'Production System',
+    statusTone: 'live',
+    liveUrl: 'https://clonmel-childrens-dental-clinic.zaydotech.com/',
+    year: '2025',
+    featured: true,
+    role: 'Full-Stack Web Engineering, UX Design & Interactive Guides',
+    image: artwork.clonmelDental,
+    grade: '',
+    accent: '#FF4D8D',
+    description:
+      'A specialized digital practice portal for Dr. Eimear Norton (Trinity Clinical Doctorate Specialist) in Clonmel, Ireland. Built with interactive 3D flip treatment cards, dark/light theme switching, video hero showcase, and parent advice guides.',
+    challenge:
+      'Dental anxiety is common among young children and parents seeking specialized paediatric care. The clinic needed an inviting, child-friendly digital portal that educates parents on fear-free treatment (like Happy Gas sedation) and makes appointment triage effortless.',
+    approach:
+      'We built a warm, accessible web application featuring interactive 3D flip cards for treatments, anti-FOUC instant light/dark theme toggles, video walkthroughs of the first visit experience, and dedicated parent advice guides on teething, decay prevention, and sports mouthguards.',
+    architecture: {
+      frontend: 'Modern HTML5/CSS3 Component Architecture, Dark/Light Theme Engine',
+      backend: 'Fast Static & Edge Rendering Framework',
+      database: 'Structured Parent Advice Knowledge Base & Treatment Registry',
+      cloud: 'Global CDN with Zero-FOUC Font & Theme Preloading',
+      automation: 'Interactive Modal Triage & Instant Phone Pill Call Handler',
+    },
+    features: [
+      'Interactive 3D flip cards for specialized paediatric treatments',
+      'Instant anti-FOUC Light / Dark mode switcher with saved preference',
+      'Multi-panel hero slideshow with Ken Burns zoom & embedded video preview',
+      'Parent advice library covering teething, diet, brushing, and sports trauma',
+      'Specialist credentials spotlight for Dr. Eimear Norton (Trinity & RCSEd)',
+    ],
+    signals: [
+      'Live client clinic application active in Tipperary, Ireland',
+      'Anxiety-reducing UX designed to reassure parents and delight children',
+      'Fully responsive, accessible, keyboard-navigable interface',
+    ],
+    outcome:
+      'Delivered a reassuring, high-trust online presence that positions the clinic as Clonmel\'s leading paediatric practice and helps parents book first-visit appointments with ease.',
+  },
 ];
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug);

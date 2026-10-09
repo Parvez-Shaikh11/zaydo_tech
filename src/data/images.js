@@ -97,4 +97,6 @@ export const artwork = {
   automation: `${BASE}/service-automation.webp`,
   aiSystems: `${BASE}/service-ai-systems.webp`,
   digitalPlatforms: `${BASE}/service-digital-platforms.webp`,
+  mindcrafters: `${BASE}/project-mindcrafters.png`,
+  clonmelDental: `${BASE}/project-clonmel-dental.png`,
 };

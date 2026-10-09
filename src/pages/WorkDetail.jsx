@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  ArrowRight, ArrowUpRight, Check, Cloud, Cpu, Database, Layers, Server, Workflow,
+  ArrowRight, ArrowUpRight, Check, Cloud, Cpu, Database, ExternalLink, Globe, Layers, Server, Workflow,
 } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import Reveal, { Stagger, staggerItem } from '../components/ui/Reveal';
@@ -48,6 +48,18 @@ export default function WorkDetail() {
         <div className="flex flex-wrap items-center gap-3">
           <StatusBadge project={project} />
           <span className="chip">Role · {project.role}</span>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="chip !border-emerald-500/40 !bg-emerald-500/10 !text-emerald-400 hover:!bg-emerald-500/20 transition-colors"
+            >
+              <Globe className="h-3.5 w-3.5" />
+              Visit Live Site
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
           {service && (
             <Link
               to={`/services/${service.id}`}
@@ -219,6 +231,20 @@ export default function WorkDetail() {
             <div className="relative">
               <h2 className="eyebrow text-emerald-400">05 — Outcome</h2>
               <p className="mt-6 text-[1rem] leading-relaxed text-ink">{project.outcome}</p>
+              {project.liveUrl && (
+                <div className="mt-6">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-emerald-400 hover:bg-emerald-500/20 transition-all shadow-sm"
+                  >
+                    <Globe className="h-4 w-4" />
+                    Visit Live Production Website
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              )}
               <p className="mt-6 border-t border-line/[0.08] pt-5 text-[0.78rem] leading-relaxed text-faint">
                 Where a numeric result cannot be substantiated, it is not stated. This
                 write-up describes what was built and what changed operationally.
